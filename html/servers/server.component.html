@@ -1,0 +1,17 @@
+<h2>Servers</h2>
+
+<div class="table-responsive">
+    <table class="table">
+        <tr *ngFor="let server of Entities">
+            <td>{{server.HostName}}</td>
+            <td>{{server.LastPing | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+            <td>
+                <img *ngIf="server.Status > 0" src="html/imgs/run_16x16.jpeg"/>
+                <img *ngIf="server.Status < 0" src="html/imgs/grey_16x16.png"/>
+            </td>
+        </tr>
+    </table>
+</div>
+<li *ngFor="let server of Entities">
+    [{{server.ID}}] {{server.HostName}} - {{server.IPs}}
+</li>
