@@ -10,6 +10,10 @@ const appRoutes: Routes = [
     component: ServerComponent
   },
   {
+    path: 'sample',
+    component: SampleComponent
+  },
+  {
     path: '',
     component: ServerComponent
   }

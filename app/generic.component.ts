@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
-import {Observable, Subscription } from 'rxjs/Rx';
+import { Observable, Subscription } from 'rxjs/Rx';
 
 import { GenericHTTPService } from './generic_http.service';
 
@@ -9,9 +9,12 @@ import { GenericHTTPService } from './generic_http.service';
     selector: 'dummy',
     templateUrl: '../../html/tasks/tasks.component.html',
 })
-export class GenericComponent<T extends EntityWithID<K>, K> implements OnInit, OnDestroy {
+export abstract class GenericComponent<T extends EntityWithID<K>, K> implements OnInit, OnDestroy {
     Entities: T[];
     polling: Subscription;
+
+    protected BeforeDataRetrieval() { }
+    protected AfterDataRetrieval() { }
 
     constructor(private service: GenericHTTPService<T, K>, private pollingInterval: number) {
         console.log('creating GenericComponent with service: ' + this.service + '. pollingInterval == ' + this.pollingInterval);
@@ -34,10 +37,12 @@ export class GenericComponent<T extends EntityWithID<K>, K> implements OnInit, O
     }
 
     protected getData() {
+        this.BeforeDataRetrieval();
         this.service.getFromREST()
             .then(r => {
                 this.Entities = r;
                 this.Entities.map(tsk => console.log(tsk));
+                this.AfterDataRetrieval();
             })
             .catch((e) => console.log('Something went wrong: ' + e + '!'));
     }

@@ -5,7 +5,6 @@ import { HttpModule }                       from '@angular/http';
 import { AppComponent }                     from './app.component';
 import { routing, routedComponents }        from './app.routing';
 
-
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule, routing ],
   declarations: [ AppComponent, routedComponents ],
