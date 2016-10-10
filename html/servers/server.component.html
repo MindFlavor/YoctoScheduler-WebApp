@@ -2,16 +2,14 @@
 
 <div class="table-responsive">
     <table class="table">
-        <tr *ngFor="let server of Entities">
-            <td>{{server.HostName}}</td>
-            <td>{{server.LastPing | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+        <tr *ngFor="let server of Entities" [class.selected]="server === selectedServer">
             <td>
-                <img *ngIf="server.Status > 0" src="html/imgs/run_16x16.jpeg"/>
-                <img *ngIf="server.Status < 0" src="html/imgs/grey_16x16.png"/>
+                <img *ngIf="server.Status > 0" src="html/imgs/green_24x24.png" />
+                <img *ngIf="server.Status < 0" src="html/imgs/stop_24x24.png" />
             </td>
+            <td (click)=onSelect(server)>{{server.HostName}}</td>        
         </tr>
     </table>
 </div>
-<li *ngFor="let server of Entities">
-    [{{server.ID}}] {{server.HostName}} - {{server.IPs}}
-</li>
+
+<server-detail [server]="selectedServer"></server-detail>

@@ -15,6 +15,8 @@ import { GenericComponent } from '../generic.component';
     providers: [ServerService]
 })
 export class ServerComponent extends GenericComponent<Server, number> {
+    selectedServer: Server;
+
     constructor(private serverService: ServerService) {
         super(serverService, 0);
     }
@@ -31,5 +33,9 @@ export class ServerComponent extends GenericComponent<Server, number> {
             else
                 return 0;
         });
+    }
+
+    public onSelect(server: Server) {
+        this.selectedServer = server;
     }
 }
