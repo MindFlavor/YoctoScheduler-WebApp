@@ -3,7 +3,8 @@ import { HttpModule } from '@angular/http';
 
 import { Observable, Subscription } from 'rxjs/Rx';
 
-import { GenericHTTPService } from './generic_http.service';
+import { GenericService } from './generic.service';
+import { EntityWithID } from './entity_with_id';
 
 @Component({
     selector: 'dummy',
@@ -16,7 +17,7 @@ export abstract class GenericComponent<T extends EntityWithID<K>, K> implements 
     protected BeforeDataRetrieval() { }
     protected AfterDataRetrieval() { }
 
-    constructor(private service: GenericHTTPService<T, K>, private pollingInterval: number) {
+    constructor(private service: GenericService<T, K>, private pollingInterval: number) {
         console.log('creating GenericComponent with service: ' + this.service + '. pollingInterval == ' + this.pollingInterval);
 
         if (this.pollingInterval > 0) {

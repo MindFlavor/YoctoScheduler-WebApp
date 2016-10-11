@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpModule, Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
+import { EntityWithID } from './entity_with_id';
+import { GenericService } from './generic.service';
 
 @Injectable()
-export abstract class GenericHTTPService<T extends EntityWithID<K>, K>  {
+export abstract class GenericHTTPService<T extends EntityWithID<K>, K> implements GenericService<T, K>  {
     protected abstract getUrl(): string;
 
     constructor(private http: Http) { }

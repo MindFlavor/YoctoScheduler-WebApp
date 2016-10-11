@@ -5,19 +5,19 @@ import { HttpModule } from '@angular/http';
 import { Observable, Subscription } from 'rxjs/Rx';
 
 import { Server } from './server';
-import { ServerService } from './server.service';
+import { ServerService, MockServerService } from './server.service';
 
 import { GenericComponent } from '../generic.component';
 
 @Component({
     selector: 'yocto-servers',
     templateUrl: '../html/servers/server.component.html',
-    providers: [ServerService]
+    providers: [MockServerService]
 })
 export class ServerComponent extends GenericComponent<Server, number> {
     selectedServer: Server;
 
-    constructor(private serverService: ServerService) {
+    constructor(private serverService: MockServerService) {
         super(serverService, 0);
     }
 

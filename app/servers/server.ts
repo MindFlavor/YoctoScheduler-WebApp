@@ -6,6 +6,5 @@ export interface Server {
     Description: string,
     Status: number,
     LastPing: Date,
-    LastScheduleCheck: Date,
     IPs: string[]
 }
