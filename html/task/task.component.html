@@ -1,0 +1,13 @@
+<h2>Tasks</h2>
+
+<div class="table-responsive">
+    <table class="table">
+        <tr *ngFor="let task of Entities" [class.selected]="task === selectedTask" (click)="onSelect(task)"> 
+            <td>
+                <img [src]="taskImage(task)" [title]="task.Type">
+            </td>
+            <td>{{task.Name}}</td>   
+            <td>{{task.Description}}</td>            
+        </tr>
+    </table>
+</div>
