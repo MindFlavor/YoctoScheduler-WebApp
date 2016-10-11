@@ -4,7 +4,7 @@ import { FormsModule }                      from '@angular/forms';
 import { HttpModule }                       from '@angular/http';
 import { AppComponent }                     from './app.component';
 import { routing, routedComponents }        from './app.routing';
-import { ServerDetailComponent } from './servers/server-detail.component';
+import { ServerDetailComponent } from './components/server/server-detail.component';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule, routing ],

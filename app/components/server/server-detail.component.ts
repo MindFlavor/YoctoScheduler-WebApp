@@ -3,7 +3,7 @@ import { Server } from './server';
 
 @Component({
     selector: 'server-detail',
-    templateUrl: '../html/servers/server-detail.component.html',
+    templateUrl: '../html/server/server-detail.component.html',
 })
 export class ServerDetailComponent {
     @Input()

@@ -4,9 +4,9 @@ import 'rxjs/add/operator/toPromise';
 
 import { Server } from './server';
 
-import { GenericHTTPService } from '../generics/generic_http.service'
-import { GenericService } from '../generics/generic.service'
-import { GenericMockService } from '../generics/generic_mock.service'
+import { GenericHTTPService } from '../../generics/generic_http.service'
+import { GenericService } from '../../generics/generic.service'
+import { GenericMockService } from '../../generics/generic_mock.service'
 
 @Injectable()
 export class ServerService extends GenericHTTPService<Server, number> {

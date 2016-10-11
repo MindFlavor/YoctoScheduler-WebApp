@@ -1,7 +1,7 @@
 import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ServerComponent }      from './servers/server.component';
+import { ServerComponent }      from './components/server/server.component';
 import { SampleComponent }      from './sample/sample.component';
 
 const appRoutes: Routes = [
