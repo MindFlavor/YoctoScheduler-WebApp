@@ -39,9 +39,15 @@ export class TaskComponent extends GenericComponent<Task, number> {
         this.selectedTask = task;
     }
 
+    public newTask(type: string) {
+        let t : Task = { ID: -1000, Type: type } as Task;
+        this.taskService.insertLocal(t);
+        this.onSelect(t);
+    }
+
     public taskImage(task: Task): string {
-        switch(task.Type) {
-            case "WaitTask": return "html/imgs/wait_24x24.png";
+        switch (task.Type) {
+            case "Wait": return "html/imgs/wait_24x24.png";
             case "Passthrough": return "html/imgs/passthrough_24x24.png";
             case "SSIS": return "html/imgs/ssis_24x24.png";
             case "PowerShell": return "html/imgs/powershell_24x24.png";

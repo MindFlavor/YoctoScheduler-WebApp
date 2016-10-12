@@ -1,13 +1,27 @@
-<h2>Tasks</h2>
+<div class="btn-group">
+	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    New task <span class="caret"></span>
+  </button>
+	<ul class="dropdown-menu">
+		<li><a (click)="newTask('TSQL')">T-SQL</a></li>
+		<li><a (click)="newTask('SSIS')">SSIS</a></li>
+		<li><a (click)="newTask('PowerShell')">PowerShell</a></li>
+		<li role="separator" class="divider"></li>
+		<li><a (click)="newTask('Passthrough')">Passthrough</a></li>
+		<li><a (click)="newTask('Wait')">Wait task</a></li>
+	</ul>
+</div>
 
 <div class="table-responsive">
-    <table class="table">
-        <tr *ngFor="let task of Entities" [class.selected]="task === selectedTask" (click)="onSelect(task)"> 
-            <td>
-                <img [src]="taskImage(task)" [title]="task.Type">
-            </td>
-            <td>{{task.Name}}</td>   
-            <td>{{task.Description}}</td>            
-        </tr>
-    </table>
+	<table class="table">
+		<tr *ngFor="let task of Entities" [class.selected]="task === selectedTask" (click)="onSelect(task)">
+			<td>
+				<img [src]="taskImage(task)" [title]="task.Type">
+			</td>
+			<td>{{task.Name}}</td>
+			<td>{{task.Description}}</td>
+		</tr>
+	</table>
 </div>
+
+<task-detail [task]="selectedTask"></task-detail>

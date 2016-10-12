@@ -1,0 +1,4 @@
+<div *ngIf="task.Type === 'Wait'">
+	<label>Sleep seconds</label>
+	<input type="number" min="0" [(value)]="task.SleepSeconds">
+</div>

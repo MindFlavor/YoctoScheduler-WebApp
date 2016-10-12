@@ -11,7 +11,7 @@ export abstract class GenericHTTPService<T extends EntityWithID<K>, K> implement
 
     constructor(private http: Http) { }
 
-    private tArray: T[];
+    protected tArray: T[];
 
     getFromREST(): Promise<T[]> {
         return this.http.get(this.getUrl())
@@ -63,7 +63,7 @@ export abstract class GenericHTTPService<T extends EntityWithID<K>, K> implement
             .catch(this.handleError);
     }
 
-    private handleError(error: any) {
+    protected handleError(error: any) {
         console.error('GenericHTTPService::' + this + ' - An error occurred', error);
         return Promise.reject(error.message || error);
     }
@@ -73,5 +73,9 @@ export abstract class GenericHTTPService<T extends EntityWithID<K>, K> implement
             return this.put(t);
         }
         return this.post(t);
+    }
+
+    insertLocal(t: T) {
+        this.tArray.push(t);
     }
 }

@@ -44,4 +44,8 @@ export abstract class GenericMockService<T extends EntityWithID<K>, K> implement
                 rej("cannot find ID " + t.ID);
         });
     }
+
+    insertLocal(t: T) {
+        this.data.push(t);
+    }
 }

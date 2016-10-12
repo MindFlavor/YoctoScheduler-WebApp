@@ -1,0 +1,7 @@
+<div *ngIf="task">
+	<div class="well"><h2>{{task.Type}} task</h2></div> 
+	<div *ngIf="task.Type === 'Wait'">
+		<task-wait [task]="task"></task-wait>
+	</div>
+	<button type="button" class="btn btn-primary" (click)="persistTask()">Persist changes</button>
+</div>
