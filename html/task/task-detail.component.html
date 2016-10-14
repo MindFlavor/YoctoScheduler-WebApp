@@ -1,6 +1,33 @@
 <div *ngIf="task">
-	<div class="well"><h2>{{task.TypeToString()}} task</h2></div> 
-	<div *ngIf="task.Type === 'Wait'">
+	<div class="well">
+		<h2>{{task.TypeToString()}} task</h2>
+	</div>
+
+
+	<div class="form-group">
+		<label for="name">Name:</label>
+		<input type="text" class="form-control" [(ngModel)]="task.Name" placeholder="Task name">
+	</div>
+	<div class="form-group">
+		<label for="desc">Description:</label>
+		<textarea class="form-control" rows="5" [(ngModel)]="task.Description"></textarea>
+	</div>
+
+	<div class="form-group">
+		<div class="checkbox">
+			<label><input type="checkbox" [(ngModel)]="localEnabled" (change)="changeConcurrencyLimit('local')">Limit local concurrency</label>
+			<input type="number" min="1" [(ngModel)]="task.ConcurrencyLimitLocal" [disabled]="!localEnabled">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="checkbox">
+			<label><input type="checkbox" [(ngModel)]="globalEnabled" (change)="changeConcurrencyLimit('global')">Limit global concurrency</label>
+			<input type="number" min="1" [(ngModel)]="task.ConcurrencyLimitGlobal" [disabled]="!globalEnabled">
+		</div>
+	</div>
+
+	<div *ngIf="task.Type === taskType.Wait">
 		<task-wait [task]="task"></task-wait>
 	</div>
 	<button type="button" class="btn btn-primary" (click)="persistTask()">Persist changes</button>

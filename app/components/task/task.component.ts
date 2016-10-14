@@ -39,6 +39,7 @@ export class TaskComponent extends GenericComponent<Task, number> {
 
     public onSelect(task: Task) {
         this.selectedTask = task;
+        console.log('selected TaskType == ' + TaskType[this.selectedTask.Type]);
     }
 
     public newTask(type: TaskType) {

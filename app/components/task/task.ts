@@ -23,6 +23,9 @@ export class Task {
     constructor() {
         this.ID = -1000;
         this.Type = TaskType.Generic;
+        this.ConcurrencyLimitGlobal = 0;
+        this.ConcurrencyLimitLocal = 0;
+        this.ReenqueueOnDead = false;
     }
 
     protected cloneData(from: Task) {
