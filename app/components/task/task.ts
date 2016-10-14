@@ -1,5 +1,14 @@
 import { EntityWithID } from '../../generics/entity_with_id';
 
+export enum TaskType {
+    Generic,
+    Wait,
+    TSQL,
+    PowerShell,
+    SSIS,
+    Passthrough,
+    Unknown = 5000
+}
 
 export class Task {
     ID: number;
@@ -8,8 +17,13 @@ export class Task {
     ConcurrencyLimitLocal: number;
     Description: string;
     ReenqueueOnDead: boolean;
-    Type: string;
+    Type: TaskType;
     Payload: string;
+
+    constructor() {
+        this.ID = -1000;
+        this.Type = TaskType.Generic;
+    }
 
     protected cloneData(from: Task) {
         this.ID = from.ID;
@@ -28,6 +42,10 @@ export class Task {
         wt.paramsToPayload();
 
         return wt;
+    }
+
+    public TypeToString() {
+        return TaskType[this.Type];
     }
 
     public updatePayload(): void {

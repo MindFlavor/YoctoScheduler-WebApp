@@ -4,7 +4,8 @@ import { HttpModule } from '@angular/http';
 
 import { Observable, Subscription } from 'rxjs/Rx';
 
-import { Task } from './task';
+import { Task, TaskType } from './task';
+import { WaitTask } from './wait/wait-task';
 import { TaskService, MockTaskService } from './task.service';
 
 import { GenericComponent } from '../../generics/generic.component';
@@ -16,6 +17,7 @@ import { GenericComponent } from '../../generics/generic.component';
 })
 export class TaskComponent extends GenericComponent<Task, number> {
     selectedTask: Task;
+    taskType = TaskType;
 
     constructor(private taskService: MockTaskService) {
         super(taskService, 0);
@@ -39,19 +41,27 @@ export class TaskComponent extends GenericComponent<Task, number> {
         this.selectedTask = task;
     }
 
-    public newTask(type: string) {
-        let t : Task = { ID: -1000, Type: type } as Task;
+    public newTask(type: TaskType) {
+        let t: Task;
+        switch (type) {
+            case TaskType.Wait:
+                t = new WaitTask();
+                break;
+            default:
+                t = new Task();
+                break;
+        }
         this.taskService.insertLocal(t);
         this.onSelect(t);
     }
 
     public taskImage(task: Task): string {
         switch (task.Type) {
-            case "Wait": return "html/imgs/wait_24x24.png";
-            case "Passthrough": return "html/imgs/passthrough_24x24.png";
-            case "SSIS": return "html/imgs/ssis_24x24.png";
-            case "PowerShell": return "html/imgs/powershell_24x24.png";
-            case "TSQL": return "html/imgs/tsql_24x24.png";
+            case TaskType.Wait: return "html/imgs/wait_24x24.png";
+            case TaskType.Passthrough: return "html/imgs/passthrough_24x24.png";
+            case TaskType.SSIS: return "html/imgs/ssis_24x24.png";
+            case TaskType.PowerShell: return "html/imgs/powershell_24x24.png";
+            case TaskType.TSQL: return "html/imgs/tsql_24x24.png";
             default: return "html/imgs/unknown_24x24.png";
         }
     }

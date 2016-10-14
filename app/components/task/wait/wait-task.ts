@@ -1,10 +1,16 @@
-import { Task } from '../task';
+import { Task, TaskType } from '../task';
 
 export class WaitTask extends Task {
     SleepSeconds: number;
 
+    constructor() {
+        super();
+
+        this.Type = TaskType.Wait;
+    }
+
     public static fromTask(t: Task): WaitTask {
-        if (!(t.Type === "Wait"))
+        if (!(t.Type === TaskType.Wait))
             throw "Unsupported conversion"
 
         let wt: WaitTask = new WaitTask();
