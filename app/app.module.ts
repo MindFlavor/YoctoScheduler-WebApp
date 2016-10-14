@@ -6,7 +6,7 @@ import { AppComponent }                     from './app.component';
 import { routing, routedComponents }        from './app.routing';
 import { ServerDetailComponent }            from './components/server/server-detail.component';
 import { TaskDetailComponent }              from './components/task/task-detail.component';
-import { TaskWaitComponent }                from './components/task/task-wait.component';
+import { TaskWaitComponent }                from './components/task/wait/task-wait.component';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule, routing ],

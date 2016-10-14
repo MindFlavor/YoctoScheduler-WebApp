@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import { Task, WaitTask } from './task';
+import { Task } from './task';
+import { WaitTask } from './wait/wait-task';
 
 import { GenericHTTPService } from '../../generics/generic_http.service'
 import { GenericService } from '../../generics/generic.service'

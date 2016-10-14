@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { Task, WaitTask } from './task';
+import { Task } from '../task';
+import { WaitTask } from './wait-task';
 
 @Component({
     selector: 'task-wait',
-    templateUrl: '../html/task/task-wait.component.html',
+    templateUrl: '../../html/task/wait/task-wait.component.html',
 })
 export class TaskWaitComponent {
     @Input()
