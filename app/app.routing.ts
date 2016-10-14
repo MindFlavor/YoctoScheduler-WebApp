@@ -7,6 +7,10 @@ import { SampleComponent }          from './sample/sample.component';
 
 const appRoutes: Routes = [
   {
+    path: 'sample',
+    component: SampleComponent
+  },
+  {
     path: 'servers',
     component: ServerComponent
   },

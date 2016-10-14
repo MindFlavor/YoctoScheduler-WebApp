@@ -11,5 +11,7 @@ export class TaskDetailComponent {
 
     public persistTask() {
         this.task.updatePayload();
+
+        console.log(this.task);
     }
 }
