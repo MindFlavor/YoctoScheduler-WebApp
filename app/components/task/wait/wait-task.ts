@@ -21,10 +21,10 @@ export class WaitTask extends Task {
     }
 
     public updatePayload(): void {
-        let wt = new WaitTask();
-        wt.SleepSeconds = this.SleepSeconds;        
+        let wt: any = {};
+        wt.SleepSeconds = this.SleepSeconds;
         this.Payload = JSON.stringify(wt);
-        console.log('this == ' + JSON.stringify(this));        
+        console.log('this == ' + JSON.stringify(this));
     }
 
     public paramsToPayload(): void {
