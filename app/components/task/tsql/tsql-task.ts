@@ -9,6 +9,7 @@ export class TSQLTask extends Task {
         super();
 
         this.Type = TaskType.TSQL;
+        this.CommandTimeout = 0;
     }
 
     public static fromTaskFromWS(t: TaskFromWS): TSQLTask {
@@ -24,16 +25,17 @@ export class TSQLTask extends Task {
 
     public updatePayload(): void {
         let wt: any = {};
+
         wt.ConnectionString = this.ConnectionString;
         wt.Statement = this.Statement;
         wt.CommandTimeout = this.CommandTimeout;
+
         this.Payload = JSON.stringify(wt);
         console.log('this == ' + JSON.stringify(this));
     }
 
     public paramsFromPayload(): void {
         let objs = JSON.parse(this.Payload);
-        console.log(objs);
         this.ConnectionString = objs.ConnectionString;
         this.Statement = objs.Statement;
         this.CommandTimeout = objs.CommandTimeout;

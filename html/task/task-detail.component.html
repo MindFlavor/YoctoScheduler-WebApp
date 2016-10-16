@@ -39,6 +39,9 @@
 			<div *ngIf="task.Type === taskType.Wait">
 				<task-wait [task]="task"></task-wait>
 			</div>
+			<div *ngIf="task.Type === taskType.TSQL">
+				<task-tsql [task]="task"></task-tsql>
+			</div>
 		</div>
 	</div>
 

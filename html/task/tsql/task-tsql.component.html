@@ -1,0 +1,14 @@
+<div class="form-group">
+	<label>Connection string: </label>
+    <textarea class="form-control" rows="1" [(ngModel)]="task.ConnectionString" placeholder="Connection string"></textarea>
+</div>
+
+<div class="form-group">
+	<label>Statement: </label>
+	<textarea class="form-control" rows="3" [(ngModel)]="task.Statement" placeholder="T-SQL statement"></textarea>
+</div>
+
+<div class="form-group">
+	<label>Command timeout: </label>
+	<input type="number" min="0" [(ngModel)]="task.CommandTimeout">
+</div>

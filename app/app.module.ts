@@ -7,10 +7,12 @@ import { routing, routedComponents }        from './app.routing';
 import { ServerDetailComponent }            from './components/server/server-detail.component';
 import { TaskDetailComponent }              from './components/task/task-detail.component';
 import { TaskWaitComponent }                from './components/task/wait/task-wait.component';
+import { TaskTSQLComponent }                from './components/task/tsql/task-tsql.component';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule, routing ],
-  declarations: [ AppComponent, routedComponents, ServerDetailComponent, TaskDetailComponent, TaskWaitComponent ],
+  declarations: [ AppComponent, routedComponents, ServerDetailComponent, TaskDetailComponent, TaskWaitComponent,
+                  TaskTSQLComponent ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
