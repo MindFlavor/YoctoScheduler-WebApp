@@ -12,6 +12,8 @@ import { GenericMockService } from '../../generics/generic_mock.service'
 
 @Injectable()
 export class TaskService extends GenericHTTPService<Task, number> {
+    constructor(http: Http) { super(http); }
+
     protected getUrl(): string {
         return 'http://localhost:9000/api/tasks';  // URL to web api
     }
@@ -45,7 +47,20 @@ export class TaskService extends GenericHTTPService<Task, number> {
             .catch(this.handleError)
     }
 
-    constructor(http: Http) { super(http); }
+
+    protected put(t: Task) {
+        let tws = t.toTaskFromWS();
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        let url = this.getUrl() + `/${t.ID}`;
+
+        return this.http
+            .put(url, JSON.stringify(tws), { headers: headers })
+            .toPromise()
+            .then(() => t)
+            .catch(this.handleError);
+    }
 }
 
 @Injectable()

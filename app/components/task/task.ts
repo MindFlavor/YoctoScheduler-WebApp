@@ -60,6 +60,30 @@ export class Task {
         return wt;
     }
 
+    public toTaskFromWS(): TaskFromWS {
+        let tws: TaskFromWS = {} as TaskFromWS;
+
+        tws.ID = this.ID;
+        tws.Name = this.Name;
+        tws.ConcurrencyLimitGlobal = this.ConcurrencyLimitGlobal;
+        tws.ConcurrencyLimitSameInstance = this.ConcurrencyLimitSameInstance;
+        tws.Description = this.Description;
+        tws.ReenqueueOnDead = this.ReenqueueOnDead;
+
+        switch (this.Type) {
+            case TaskType.Wait:
+                tws.Type = "WaitTask";
+                break;
+            case TaskType.TSQL:
+                tws.Type = "TSQLTask";
+                break;
+            default:
+                tws.Type = "Unknown";
+                break;
+        }
+        return tws;
+    }
+
     public TypeToString() {
         return TaskType[this.Type];
     }

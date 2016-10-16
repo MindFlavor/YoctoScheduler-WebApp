@@ -1,9 +1,11 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Task, TaskType } from './task';
+import { TaskService, MockTaskService } from './task.service'
 
 @Component({
     selector: 'task-detail',
     templateUrl: '../html/task/task-detail.component.html',
+    providers: [TaskService, MockTaskService]
 })
 export class TaskDetailComponent implements OnChanges {
     @Input()
@@ -14,8 +16,12 @@ export class TaskDetailComponent implements OnChanges {
     localEnabled = true;
     globalEnabled = true;
 
+    constructor(private taskService: TaskService) { }
+
     public persistTask() {
         this.task.updatePayload();
+
+        this.taskService.save(this.task);
 
         console.log('persistTask(): ' + this.task);
     }
