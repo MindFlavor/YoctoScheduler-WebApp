@@ -42,11 +42,14 @@
 			<div *ngIf="task.Type === taskType.TSQL">
 				<task-tsql [task]="task"></task-tsql>
 			</div>
+			<div *ngIf="task.Type === taskType.PowerShell">
+				<task-powershell [task]="task"></task-powershell>
+			</div>
 		</div>
 	</div>
 
 	<button type="button" class="btn btn-primary" (click)="persistTask()" [disabled]="!buttonEnabled">Persist changes</button>
 	<!--<div *ngIf="!buttonEnabled">-->
-		<img src="html/imgs/wait_24x24.gif" *ngIf="!buttonEnabled">
+	<img src="html/imgs/wait_24x24.gif" *ngIf="!buttonEnabled">
 	<!--</div>-->
 </div>

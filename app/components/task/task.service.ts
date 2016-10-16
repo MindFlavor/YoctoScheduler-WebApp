@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 import { Task, TaskFromWS, TaskType } from './task';
 import { WaitTask } from './wait/wait-task';
 import { TSQLTask } from './tsql/tsql-task';
+import { PowerShellTask } from './powershell/powershell-task';
 
 import { GenericHTTPService } from '../../generics/generic_http.service'
 import { GenericService } from '../../generics/generic.service'
@@ -38,6 +39,9 @@ export class TaskService extends GenericHTTPService<Task, number> {
                         case "TSQLTask":
                             this.tArray.push(TSQLTask.fromTaskFromWS(obj));
                             break;
+                        case "PowerShellTask":
+                            this.tArray.push(PowerShellTask.fromTaskFromWS(obj));
+                            break;
                         default: this.tArray.push(Task.fromTaskFromWS(obj));
                             break;
                     }
@@ -59,6 +63,8 @@ export class TaskService extends GenericHTTPService<Task, number> {
             .put(url, JSON.stringify(tws), { headers: headers })
             .toPromise()
             .then(resp => {
+                console.log(resp.text);
+                let obj = resp.json();
                 t.ID = resp.json().ID;
                 return t;
             })
@@ -95,6 +101,9 @@ export class MockTaskService extends GenericMockService<Task, number>  {
                             break;
                         case "TSQLTask":
                             this.data.push(TSQLTask.fromTaskFromWS(obj));
+                            break;
+                        case "PowerShellTask":
+                            this.data.push(PowerShellTask.fromTaskFromWS(obj));
                             break;
                         default: this.data.push(Task.fromTaskFromWS(obj));
                             break;

@@ -78,6 +78,9 @@ export class Task {
             case TaskType.TSQL:
                 tws.Type = "TSQLTask";
                 break;
+            case TaskType.PowerShell:
+                tws.Type = "PowerShellTask";
+                break;
             default:
                 tws.Type = "Unknown";
                 break;

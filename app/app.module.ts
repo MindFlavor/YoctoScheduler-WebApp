@@ -8,11 +8,12 @@ import { ServerDetailComponent }            from './components/server/server-det
 import { TaskDetailComponent }              from './components/task/task-detail.component';
 import { TaskWaitComponent }                from './components/task/wait/task-wait.component';
 import { TaskTSQLComponent }                from './components/task/tsql/task-tsql.component';
+import { TaskPowerShellComponent }          from './components/task/powershell/task-powershell.component';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule, routing ],
   declarations: [ AppComponent, routedComponents, ServerDetailComponent, TaskDetailComponent, TaskWaitComponent,
-                  TaskTSQLComponent ],
+                  TaskTSQLComponent, TaskPowerShellComponent ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
