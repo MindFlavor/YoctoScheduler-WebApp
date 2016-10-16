@@ -4,6 +4,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { Task, TaskFromWS, TaskType } from './task';
 import { WaitTask } from './wait/wait-task';
+import { TSQLTask } from './tsql/tsql-task';
 
 import { GenericHTTPService } from '../../generics/generic_http.service'
 import { GenericService } from '../../generics/generic.service'
@@ -32,6 +33,9 @@ export class TaskService extends GenericHTTPService<Task, number> {
                         case "WaitTask":
                             this.tArray.push(WaitTask.fromTaskFromWS(obj));
                             break;
+                        case "TSQLTask":
+                            this.tArray.push(TSQLTask.fromTaskFromWS(obj));
+                            break;
                         default: this.tArray.push(Task.fromTaskFromWS(obj));
                             break;
                     }
@@ -53,12 +57,10 @@ export class MockTaskService extends GenericMockService<Task, number>  {
             { ID: 1, Name: 'mock_1', ConcurrencyLimitGlobal: 0, ConcurrencyLimitSameInstance: 5, Description: "mock_task_1", ReenqueueOnDead: false, Type: "WaitTask", Payload: '{"SleepSeconds":35}' } as TaskFromWS,
             { ID: 2, Name: 'mock_2', ConcurrencyLimitGlobal: 1, ConcurrencyLimitSameInstance: 1, Description: "mock_task_2", ReenqueueOnDead: true, Type: "PassthroughTask", Payload: '{}' } as TaskFromWS,
             { ID: 3, Name: 'mock_3', ConcurrencyLimitGlobal: 1, ConcurrencyLimitSameInstance: 0, Description: "mock_task_3", ReenqueueOnDead: true, Type: "SSISTask", Payload: '{}' } as TaskFromWS,
-            { ID: 4, Name: 'mock_4', ConcurrencyLimitGlobal: 1, ConcurrencyLimitSameInstance: 0, Description: "mock_task_4", ReenqueueOnDead: true, Type: "PowerShellTask", Payload: '{}' } as TaskFromWS,
-            { ID: 5, Name: 'mock_5', ConcurrencyLimitGlobal: 7, ConcurrencyLimitSameInstance: 10, Description: "mock_task_5", ReenqueueOnDead: true, Type: "TSQLTask", Payload: '{}' } as TaskFromWS,
+            { ID: 4, Name: 'mock_4', ConcurrencyLimitGlobal: 1, ConcurrencyLimitSameInstance: 0, Description: "mock_task_4", ReenqueueOnDead: true, Type: "PowerShellTask", Payload: '{"Script":"Get-PSDrive | foreach { $_.Name, $_.Root, $_.Used, $_.Free | Out-String }"}' } as TaskFromWS,
+            { ID: 5, Name: 'mock_5', ConcurrencyLimitGlobal: 7, ConcurrencyLimitSameInstance: 10, Description: "mock_task_5", ReenqueueOnDead: true, Type: "TSQLTask", Payload: '{"ConnectionString":"%%[MyConnectionString]%%", "Statement":"SELECT @@SERVERNAME","CommandTimeout":600}' } as TaskFromWS,
             { ID: 5, Name: 'mock_6', ConcurrencyLimitGlobal: 4, ConcurrencyLimitSameInstance: 4, Description: "mock_task_6", ReenqueueOnDead: true, Type: "UnknownTask", Payload: '{}' } as TaskFromWS
         ];
-
-
 
         return undefined;
     }
@@ -67,11 +69,14 @@ export class MockTaskService extends GenericMockService<Task, number>  {
         return super.getFromREST()
             .then(resp => {
                 this.data = [];
-          
+
                 this.taskFromWS.map(obj => {
                     switch (obj.Type) {
                         case "WaitTask":
                             this.data.push(WaitTask.fromTaskFromWS(obj));
+                            break;
+                        case "TSQLTask":
+                            this.data.push(TSQLTask.fromTaskFromWS(obj));
                             break;
                         default: this.data.push(Task.fromTaskFromWS(obj));
                             break;

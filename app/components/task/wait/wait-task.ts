@@ -15,7 +15,7 @@ export class WaitTask extends Task {
 
         let wt: WaitTask = new WaitTask();
         wt.cloneData(t);
-        wt.paramsToPayload();
+        wt.paramsFromPayload();
 
         return wt;
     }
@@ -27,7 +27,7 @@ export class WaitTask extends Task {
         console.log('this == ' + JSON.stringify(this));
     }
 
-    public paramsToPayload(): void {
+    public paramsFromPayload(): void {
         let objs = JSON.parse(this.Payload) as WaitTask;
         console.log(objs);
         this.SleepSeconds = objs.SleepSeconds;

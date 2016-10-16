@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs/Rx';
 
 import { Task, TaskType } from './task';
 import { WaitTask } from './wait/wait-task';
+import { TSQLTask } from './tsql/tsql-task';
 import { TaskService, MockTaskService } from './task.service';
 
 import { GenericComponent } from '../../generics/generic.component';
@@ -23,20 +24,6 @@ export class TaskComponent extends GenericComponent<Task, number> {
         super(taskService, 0);
     }
 
-    protected AfterDataRetrieval() {
-        // if (!this.Entities)
-        //     return;
-
-        // this.Entities = this.Entities.sort((a: Server, b: Server): number => {
-        //     if (a.Status > b.Status)
-        //         return -1;
-        //     else if (a.Status < b.Status)
-        //         return 1;
-        //     else
-        //         return 0;
-        // });
-    }
-
     public onSelect(task: Task) {
         this.selectedTask = task;
         console.log('selected TaskType == ' + TaskType[this.selectedTask.Type]);
@@ -47,6 +34,9 @@ export class TaskComponent extends GenericComponent<Task, number> {
         switch (type) {
             case TaskType.Wait:
                 t = new WaitTask();
+                break;
+            case TaskType.TSQL:
+                t = new TSQLTask();
                 break;
             default:
                 t = new Task();

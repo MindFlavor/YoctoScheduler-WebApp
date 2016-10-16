@@ -46,7 +46,7 @@ export class Task {
         this.ConcurrencyLimitSameInstance = from.ConcurrencyLimitSameInstance;
         this.Description = from.Description;
         this.ReenqueueOnDead = from.ReenqueueOnDead;
-        
+
         // TODO
         // this.Type = from.Type;
         this.Payload = from.Payload;
@@ -55,7 +55,7 @@ export class Task {
     public static fromTaskFromWS(t: TaskFromWS): Task {
         let wt: Task = new Task();
         wt.cloneData(t);
-        wt.paramsToPayload();
+        wt.paramsFromPayload();
 
         return wt;
     }
@@ -67,7 +67,7 @@ export class Task {
     public updatePayload(): void {
     }
 
-    public paramsToPayload(): void {
+    public paramsFromPayload(): void {
     }
 }
 
