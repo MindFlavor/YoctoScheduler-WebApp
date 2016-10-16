@@ -7,6 +7,7 @@ export class WaitTask extends Task {
         super();
 
         this.Type = TaskType.Wait;
+        this.SleepSeconds = 60;
     }
 
     public static fromTaskFromWS(t: TaskFromWS): WaitTask {

@@ -56,4 +56,10 @@ export class TaskComponent extends GenericComponent<Task, number> {
             default: return "html/imgs/unknown_24x24.png";
         }
     }
+
+    public concurrencyToString(t: Task): string {
+        let sLocal = t.ConcurrencyLimitSameInstance == 0 ? "∞" : t.ConcurrencyLimitSameInstance;
+        let sGlobal = t.ConcurrencyLimitGlobal == 0 ? "∞" : t.ConcurrencyLimitGlobal;
+        return `[${sLocal}/${sGlobal}]`;
+    }
 }
