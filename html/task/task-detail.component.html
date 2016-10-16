@@ -20,7 +20,7 @@
 			<div class="form-group">
 				<div class="checkbox">
 					<label><input type="checkbox" [(ngModel)]="localEnabled" (change)="changeConcurrencyLimit('local')">Limit local concurrency</label>
-					<input type="number" min="1" [(ngModel)]="task.ConcurrencyLimitLocal" [disabled]="!localEnabled">
+					<input type="number" min="1" [(ngModel)]="task.ConcurrencyLimitSameInstance" [disabled]="!localEnabled">
 				</div>
 			</div>
 

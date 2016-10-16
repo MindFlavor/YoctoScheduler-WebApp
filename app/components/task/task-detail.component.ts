@@ -22,7 +22,7 @@ export class TaskDetailComponent implements OnChanges {
 
     public ngOnChanges() {
         if (this.task) {
-            this.localEnabled = this.task.ConcurrencyLimitLocal > 0;
+            this.localEnabled = this.task.ConcurrencyLimitSameInstance > 0;
             this.globalEnabled = this.task.ConcurrencyLimitGlobal > 0;
         }
     }
@@ -30,10 +30,10 @@ export class TaskDetailComponent implements OnChanges {
     public changeConcurrencyLimit(type: string) {
         switch (type) {
             case 'local':
-                if (this.task.ConcurrencyLimitLocal === 0)
-                    this.task.ConcurrencyLimitLocal = 1;
+                if (this.task.ConcurrencyLimitSameInstance === 0)
+                    this.task.ConcurrencyLimitSameInstance = 1;
                 else
-                    this.task.ConcurrencyLimitLocal = 0;
+                    this.task.ConcurrencyLimitSameInstance = 0;
                 break;
             case 'global':
                 if (this.task.ConcurrencyLimitGlobal === 0)

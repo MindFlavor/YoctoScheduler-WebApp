@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import { Task, TaskType } from './task';
+import { Task, TaskFromWS, TaskType } from './task';
 import { WaitTask } from './wait/wait-task';
 
 import { GenericHTTPService } from '../../generics/generic_http.service'
@@ -16,19 +16,29 @@ export class TaskService extends GenericHTTPService<Task, number> {
     }
 
     getFromREST(): Promise<Task[]> {
-        return super.getFromREST()
+        return this.http.get(this.getUrl())
+            .toPromise()
             .then(resp => {
-                let tempArray: Task[] = [];
-                this.tArray.map(obj => {
+                let objs = resp.json() as Array<any>;
+
+                let _tArray: TaskFromWS[] = [];
+                this.tArray = [];
+
+                objs.map(obj => _tArray.push(obj as TaskFromWS));
+
+                _tArray.map(obj => {
+                    console.log(obj);
                     switch (obj.Type) {
-                        case TaskType.Wait: tempArray.push(WaitTask.fromTask(obj));
-                        default: tempArray.push(obj);
+                        case "WaitTask":
+                            this.tArray.push(WaitTask.fromTaskFromWS(obj));
+                            break;
+                        default: this.tArray.push(Task.fromTaskFromWS(obj));
+                            break;
                     }
                 });
-                this.tArray = tempArray;
                 return this.tArray;
             })
-            .catch(super.handleError)
+            .catch(this.handleError)
     }
 
     constructor(http: Http) { super(http); }
@@ -36,30 +46,37 @@ export class TaskService extends GenericHTTPService<Task, number> {
 
 @Injectable()
 export class MockTaskService extends GenericMockService<Task, number>  {
+    private taskFromWS: TaskFromWS[];
+
     protected initializeData(): Task[] {
-        return [
-            { ID: 1, Name: 'mock_1', ConcurrencyLimitGlobal: 0, ConcurrencyLimitLocal: 5, Description: "mock_task_1", ReenqueueOnDead: true, Type: TaskType.Wait, Payload: '{"SleepSeconds":35}' } as Task,
-            { ID: 2, Name: 'mock_2', ConcurrencyLimitGlobal: 1, ConcurrencyLimitLocal: 1, Description: "mock_task_2", ReenqueueOnDead: true, Type: TaskType.Passthrough, Payload: '{}' } as Task,
-            { ID: 3, Name: 'mock_3', ConcurrencyLimitGlobal: 1, ConcurrencyLimitLocal: 0, Description: "mock_task_3", ReenqueueOnDead: true, Type: TaskType.SSIS, Payload: '{}' } as Task,
-            { ID: 4, Name: 'mock_4', ConcurrencyLimitGlobal: 1, ConcurrencyLimitLocal: 0, Description: "mock_task_4", ReenqueueOnDead: true, Type: TaskType.PowerShell, Payload: '{}' } as Task,
-            { ID: 5, Name: 'mock_5', ConcurrencyLimitGlobal: 7, ConcurrencyLimitLocal: 10, Description: "mock_task_5", ReenqueueOnDead: true, Type: TaskType.TSQL, Payload: '{}' } as Task,
-            { ID: 5, Name: 'mock_6', ConcurrencyLimitGlobal: 4, ConcurrencyLimitLocal: 4, Description: "mock_task_6", ReenqueueOnDead: true, Type: TaskType.Unknown, Payload: '{}' } as Task
+        this.taskFromWS = [
+            { ID: 1, Name: 'mock_1', ConcurrencyLimitGlobal: 0, ConcurrencyLimitSameInstance: 5, Description: "mock_task_1", ReenqueueOnDead: false, Type: "WaitTask", Payload: '{"SleepSeconds":35}' } as TaskFromWS,
+            { ID: 2, Name: 'mock_2', ConcurrencyLimitGlobal: 1, ConcurrencyLimitSameInstance: 1, Description: "mock_task_2", ReenqueueOnDead: true, Type: "PassthroughTask", Payload: '{}' } as TaskFromWS,
+            { ID: 3, Name: 'mock_3', ConcurrencyLimitGlobal: 1, ConcurrencyLimitSameInstance: 0, Description: "mock_task_3", ReenqueueOnDead: true, Type: "SSISTask", Payload: '{}' } as TaskFromWS,
+            { ID: 4, Name: 'mock_4', ConcurrencyLimitGlobal: 1, ConcurrencyLimitSameInstance: 0, Description: "mock_task_4", ReenqueueOnDead: true, Type: "PowerShellTask", Payload: '{}' } as TaskFromWS,
+            { ID: 5, Name: 'mock_5', ConcurrencyLimitGlobal: 7, ConcurrencyLimitSameInstance: 10, Description: "mock_task_5", ReenqueueOnDead: true, Type: "TSQLTask", Payload: '{}' } as TaskFromWS,
+            { ID: 5, Name: 'mock_6', ConcurrencyLimitGlobal: 4, ConcurrencyLimitSameInstance: 4, Description: "mock_task_6", ReenqueueOnDead: true, Type: "UnknownTask", Payload: '{}' } as TaskFromWS
         ];
+
+
+
+        return undefined;
     }
 
     getFromREST(): Promise<Task[]> {
         return super.getFromREST()
             .then(resp => {
-                let tempArray: Task[] = [];
-                this.data.map(obj => {
+                this.data = [];
+          
+                this.taskFromWS.map(obj => {
                     switch (obj.Type) {
-                        case TaskType.Wait:
-                            tempArray.push(WaitTask.fromTask(obj));
+                        case "WaitTask":
+                            this.data.push(WaitTask.fromTaskFromWS(obj));
                             break;
-                        default: tempArray.push(Task.fromTask(obj));
+                        default: this.data.push(Task.fromTaskFromWS(obj));
+                            break;
                     }
                 });
-                this.data = tempArray;
                 return this.data;
             });
     }

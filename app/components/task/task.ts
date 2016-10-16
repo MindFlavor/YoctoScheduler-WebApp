@@ -10,11 +10,22 @@ export enum TaskType {
     Unknown = 5000
 }
 
+export interface TaskFromWS {
+    ID: number;
+    Name: string;
+    ConcurrencyLimitGlobal: number;
+    ConcurrencyLimitSameInstance: number;
+    Description: string;
+    ReenqueueOnDead: boolean;
+    Type: string;
+    Payload: string;
+}
+
 export class Task {
     ID: number;
     Name: string;
     ConcurrencyLimitGlobal: number;
-    ConcurrencyLimitLocal: number;
+    ConcurrencyLimitSameInstance: number;
     Description: string;
     ReenqueueOnDead: boolean;
     Type: TaskType;
@@ -24,22 +35,24 @@ export class Task {
         this.ID = -1000;
         this.Type = TaskType.Generic;
         this.ConcurrencyLimitGlobal = 0;
-        this.ConcurrencyLimitLocal = 0;
+        this.ConcurrencyLimitSameInstance = 0;
         this.ReenqueueOnDead = false;
     }
 
-    protected cloneData(from: Task) {
+    protected cloneData(from: TaskFromWS) {
         this.ID = from.ID;
         this.Name = from.Name;
         this.ConcurrencyLimitGlobal = from.ConcurrencyLimitGlobal;
-        this.ConcurrencyLimitLocal = from.ConcurrencyLimitLocal;
+        this.ConcurrencyLimitSameInstance = from.ConcurrencyLimitSameInstance;
         this.Description = from.Description;
         this.ReenqueueOnDead = from.ReenqueueOnDead;
-        this.Type = from.Type;
+        
+        // TODO
+        // this.Type = from.Type;
         this.Payload = from.Payload;
     }
 
-    public static fromTask(t: Task): Task {
+    public static fromTaskFromWS(t: TaskFromWS): Task {
         let wt: Task = new Task();
         wt.cloneData(t);
         wt.paramsToPayload();

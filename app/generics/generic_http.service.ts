@@ -9,7 +9,7 @@ import { GenericService } from './generic.service';
 export abstract class GenericHTTPService<T extends EntityWithID<K>, K> implements GenericService<T, K>  {
     protected abstract getUrl(): string;
 
-    constructor(private http: Http) { }
+    constructor(protected http: Http) { }
 
     protected tArray: T[];
 

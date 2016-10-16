@@ -13,7 +13,7 @@ import { GenericComponent } from '../../generics/generic.component';
 @Component({
     selector: 'yocto-servers',
     templateUrl: '../html/task/task.component.html',
-    providers: [MockTaskService]
+    providers: [TaskService, MockTaskService]
 })
 export class TaskComponent extends GenericComponent<Task, number> {
     selectedTask: Task;
