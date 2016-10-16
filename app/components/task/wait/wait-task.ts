@@ -22,14 +22,15 @@ export class WaitTask extends Task {
 
     public updatePayload(): void {
         let wt: any = {};
+
         wt.SleepSeconds = this.SleepSeconds;
+
         this.Payload = JSON.stringify(wt);
         console.log('this == ' + JSON.stringify(this));
     }
 
     public paramsFromPayload(): void {
         let objs = JSON.parse(this.Payload) as WaitTask;
-        console.log(objs);
         this.SleepSeconds = objs.SleepSeconds;
     }
 }

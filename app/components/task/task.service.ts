@@ -58,7 +58,10 @@ export class TaskService extends GenericHTTPService<Task, number> {
         return this.http
             .put(url, JSON.stringify(tws), { headers: headers })
             .toPromise()
-            .then(() => t)
+            .then(resp => {
+                t.ID = resp.json().ID;
+                return t;
+            })
             .catch(this.handleError);
     }
 }

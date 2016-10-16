@@ -69,6 +69,7 @@ export class Task {
         tws.ConcurrencyLimitSameInstance = this.ConcurrencyLimitSameInstance;
         tws.Description = this.Description;
         tws.ReenqueueOnDead = this.ReenqueueOnDead;
+        tws.Payload = this.Payload;
 
         switch (this.Type) {
             case TaskType.Wait:

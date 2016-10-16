@@ -42,5 +42,8 @@
 		</div>
 	</div>
 
-	<button type="button" class="btn btn-primary" (click)="persistTask()">Persist changes</button>
+	<button type="button" class="btn btn-primary" (click)="persistTask()" [disabled]="!buttonEnabled">Persist changes</button>
+	<!--<div *ngIf="!buttonEnabled">-->
+		<img src="html/imgs/wait_24x24.gif" *ngIf="!buttonEnabled">
+	<!--</div>-->
 </div>

@@ -15,15 +15,19 @@ export class TaskDetailComponent implements OnChanges {
 
     localEnabled = true;
     globalEnabled = true;
+    buttonEnabled = true;
 
     constructor(private taskService: TaskService) { }
 
     public persistTask() {
+        this.buttonEnabled = false;
         this.task.updatePayload();
 
         this.taskService.save(this.task);
 
         console.log('persistTask(): ' + this.task);
+
+        this.buttonEnabled = true;
     }
 
     public ngOnChanges() {
