@@ -18,10 +18,12 @@
 			<td>
 				<img [src]="taskImage(task)" [title]="task.TypeToString()">
 			</td>
-			<td>{{task.Name}}</td>
 			<td>
-				<img *ngIf="task.ReenqueueOnDead" src="html/imgs/restart_24x24.png" title="Auto reenqueue if hosting server dies: enabled">
-				<img *ngIf="!task.ReenqueueOnDead" src="html/imgs/restart_24x24_bw.png" title="auto reenqueue if hosting server dies: disabled">
+				<span class="label label-default">{{task.Name}}</span>
+			</td>
+			<td>
+				<img *ngIf="task.ReenqueueOnDead" src="html/imgs/restart_16x16.png" title="Auto reenqueue if hosting server dies: enabled">
+				<img *ngIf="!task.ReenqueueOnDead" src="html/imgs/restart_16x16_bw.png" title="auto reenqueue if hosting server dies: disabled">
 			</td>
 			<td><span class="label label-primary">{{concurrencyToString(task)}}</span></td>
 		</tr>

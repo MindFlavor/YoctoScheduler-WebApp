@@ -48,12 +48,12 @@ export class TaskComponent extends GenericComponent<Task, number> {
 
     public taskImage(task: Task): string {
         switch (task.Type) {
-            case TaskType.Wait: return "html/imgs/wait_24x24.png";
-            case TaskType.Passthrough: return "html/imgs/passthrough_24x24.png";
-            case TaskType.SSIS: return "html/imgs/ssis_24x24.png";
-            case TaskType.PowerShell: return "html/imgs/powershell_24x24.png";
-            case TaskType.TSQL: return "html/imgs/tsql_24x24.png";
-            default: return "html/imgs/unknown_24x24.png";
+            case TaskType.Wait: return "html/imgs/wait_16x16.png";
+            case TaskType.Passthrough: return "html/imgs/passthrough_16x16.png";
+            case TaskType.SSIS: return "html/imgs/ssis_16x16.png";
+            case TaskType.PowerShell: return "html/imgs/powershell_16x16.png";
+            case TaskType.TSQL: return "html/imgs/tsql_16x16.png";
+            default: return "html/imgs/unknown_16x16.png";
         }
     }
 
