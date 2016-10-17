@@ -3,11 +3,11 @@
 		<div class="panel-heading">Standard options</div>
 		<div class="panel-body">
 			<div class="form-group">
-				<label for="name">Name:</label>
+				<label for="name">Name: </label>
 				<input type="text" class="form-control" [(ngModel)]="task.Name" placeholder="Task name">
 			</div>
 			<div class="form-group">
-				<label for="desc">Description:</label>
+				<label for="desc">Description: </label>
 				<textarea class="form-control" rows="2" [(ngModel)]="task.Description"></textarea>
 			</div>
 
@@ -19,14 +19,14 @@
 
 			<div class="form-group">
 				<div class="checkbox">
-					<label><input type="checkbox" [(ngModel)]="localEnabled" (change)="changeConcurrencyLimit('local')">Limit local concurrency</label>
+					<label><input type="checkbox" [(ngModel)]="localEnabled" (change)="changeConcurrencyLimit('local')">Local concurrency limit: </label>
 					<input type="number" min="1" [(ngModel)]="task.ConcurrencyLimitSameInstance" [disabled]="!localEnabled">
 				</div>
 			</div>
 
 			<div class="form-group">
 				<div class="checkbox">
-					<label><input type="checkbox" [(ngModel)]="globalEnabled" (change)="changeConcurrencyLimit('global')">Limit global concurrency</label>
+					<label><input type="checkbox" [(ngModel)]="globalEnabled" (change)="changeConcurrencyLimit('global')">Global concurrency limit: </label>
 					<input type="number" min="1" [(ngModel)]="task.ConcurrencyLimitGlobal" [disabled]="!globalEnabled">
 				</div>
 			</div>
@@ -45,11 +45,12 @@
 			<div *ngIf="task.Type === taskType.PowerShell">
 				<task-powershell [task]="task"></task-powershell>
 			</div>
+			<div *ngIf="task.Type === taskType.SSIS">
+				<task-ssis [task]="task"></task-ssis>
+			</div>
 		</div>
 	</div>
 
 	<button type="button" class="btn btn-primary" (click)="persistTask()" [disabled]="!buttonEnabled">Persist changes</button>
-	<!--<div *ngIf="!buttonEnabled">-->
 	<img src="html/imgs/wait_24x24.gif" *ngIf="!buttonEnabled">
-	<!--</div>-->
 </div>

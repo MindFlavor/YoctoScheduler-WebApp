@@ -81,6 +81,9 @@ export class Task {
             case TaskType.PowerShell:
                 tws.Type = "PowerShellTask";
                 break;
+            case TaskType.SSIS:
+                tws.Type = "SSISTask";
+                break;
             default:
                 tws.Type = "Unknown";
                 break;

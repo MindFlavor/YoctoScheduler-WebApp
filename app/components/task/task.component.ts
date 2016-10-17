@@ -8,6 +8,8 @@ import { Task, TaskType } from './task';
 import { WaitTask } from './wait/wait-task';
 import { TSQLTask } from './tsql/tsql-task';
 import { PowerShellTask } from './powershell/powershell-task';
+import { SSISTask } from './ssis/ssis-task';
+
 import { TaskService, MockTaskService } from './task.service';
 
 import { GenericComponent } from '../../generics/generic.component';
@@ -41,6 +43,9 @@ export class TaskComponent extends GenericComponent<Task, number> {
                 break;
             case TaskType.PowerShell:
                 t = new PowerShellTask();
+                break;
+            case TaskType.SSIS:
+                t = new SSISTask();
                 break;
             default:
                 t = new Task();

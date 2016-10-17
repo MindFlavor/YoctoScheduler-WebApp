@@ -6,6 +6,7 @@ import { Task, TaskFromWS, TaskType } from './task';
 import { WaitTask } from './wait/wait-task';
 import { TSQLTask } from './tsql/tsql-task';
 import { PowerShellTask } from './powershell/powershell-task';
+import { SSISTask } from './ssis/ssis-task';
 
 import { GenericHTTPService } from '../../generics/generic_http.service'
 import { GenericService } from '../../generics/generic.service'
@@ -41,6 +42,9 @@ export class TaskService extends GenericHTTPService<Task, number> {
                             break;
                         case "PowerShellTask":
                             this.tArray.push(PowerShellTask.fromTaskFromWS(obj));
+                            break;
+                        case "SSISTask":
+                            this.tArray.push(SSISTask.fromTaskFromWS(obj));
                             break;
                         default: this.tArray.push(Task.fromTaskFromWS(obj));
                             break;
@@ -104,6 +108,9 @@ export class MockTaskService extends GenericMockService<Task, number>  {
                             break;
                         case "PowerShellTask":
                             this.data.push(PowerShellTask.fromTaskFromWS(obj));
+                            break;
+                        case "SSISTask":
+                            this.data.push(SSISTask.fromTaskFromWS(obj));
                             break;
                         default: this.data.push(Task.fromTaskFromWS(obj));
                             break;
