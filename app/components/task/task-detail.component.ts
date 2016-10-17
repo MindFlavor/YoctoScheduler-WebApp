@@ -17,17 +17,36 @@ export class TaskDetailComponent implements OnChanges {
     globalEnabled = true;
     buttonEnabled = true;
 
+    lastError: string = undefined;
+
     constructor(private taskService: TaskService) { }
 
     public persistTask() {
         this.buttonEnabled = false;
         this.task.updatePayload();
 
-        this.taskService.save(this.task);
+        this.taskService.save(this.task)
+            .then(() => {
+                this.lastError = undefined;
+                console.log('persistTask() completed: ' + this.task);
+                this.buttonEnabled = true;
+            })
+            .catch((exce) => {
+                if (exce._body) {
+                    let t = JSON.parse(exce._body);
 
-        console.log('persistTask(): ' + this.task);
+                    if (t.ExceptionMessage)
+                        this.lastError = t.ExceptionMessage;
+                    else
+                        this.lastError = exce.Message;
+                }
+                else {
+                    this.lastError = exce;
+                }
 
-        this.buttonEnabled = true;
+                console.log('persistTask failed: ' + this.lastError);
+                this.buttonEnabled = true;
+            });
     }
 
     public ngOnChanges() {

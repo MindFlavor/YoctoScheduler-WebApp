@@ -21,7 +21,7 @@ export abstract class GenericComponent<T extends EntityWithID<K>, K> implements 
         console.log('creating GenericComponent with service: ' + this.service + '. pollingInterval == ' + this.pollingInterval);
 
         if (this.pollingInterval > 0) {
-            this.polling = Observable.interval(1000)
+            this.polling = Observable.interval(this.pollingInterval)
                 .subscribe(() => {
                     this.getData();
                 });

@@ -63,8 +63,10 @@ export class TaskService extends GenericHTTPService<Task, number> {
 
         let url = this.getUrl() + `/${t.ID}`;
 
+        let objJSON = JSON.stringify(tws);
+
         return this.http
-            .put(url, JSON.stringify(tws), { headers: headers })
+            .put(url, objJSON, { headers: headers })
             .toPromise()
             .then(resp => {
                 console.log(resp.text);
