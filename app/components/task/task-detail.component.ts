@@ -19,7 +19,7 @@ export class TaskDetailComponent implements OnChanges {
 
     lastError: string = undefined;
 
-    constructor(private taskService: TaskService) { }
+    constructor(private taskService: MockTaskService) { }
 
     public persistTask() {
         this.buttonEnabled = false;

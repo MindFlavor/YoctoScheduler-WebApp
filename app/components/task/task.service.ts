@@ -56,7 +56,7 @@ export class TaskService extends GenericHTTPService<Task, number> {
     }
 
 
-    protected put(t: Task) {
+    protected put(t: Task): Promise<Task> {
         let tws = t.toTaskFromWS();
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -120,6 +120,15 @@ export class MockTaskService extends GenericMockService<Task, number>  {
                 });
                 return this.data;
             });
+    }
+
+    public save(t: Task): Promise<Task> {
+        let tws = t.toTaskFromWS();
+        this.taskFromWS.push(tws);
+
+        return new Promise((res, rej) => {
+            res(t);
+        });
     }
 }
 

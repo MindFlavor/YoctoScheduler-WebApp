@@ -50,7 +50,7 @@ export abstract class GenericHTTPService<T extends EntityWithID<K>, K> implement
             .catch(this.handleError);
     }
 
-    protected put(t: T) {
+    protected put(t: T): Promise<T> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
