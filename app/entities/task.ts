@@ -39,6 +39,11 @@ export class Task {
         this.ReenqueueOnDead = false;
     }
 
+    public toString = () : string => {
+
+        return `Task (ID: ${this.ID}, Name: ${this.Name})`;
+    }
+
     protected cloneData(from: TaskFromWS) {
         this.ID = from.ID;
         this.Name = from.Name;

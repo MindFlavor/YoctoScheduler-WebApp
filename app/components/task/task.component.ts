@@ -71,4 +71,8 @@ export class TaskComponent extends GenericComponent<Task, number> {
         let sGlobal = t.ConcurrencyLimitGlobal == 0 ? "∞" : t.ConcurrencyLimitGlobal;
         return `[${sLocal}/${sGlobal}]`;
     }
+
+    public sendToQueue(t: Task, highPriority: boolean) {
+        console.log('requested sendToQueue(t: ' + t + ', highPriority:' + highPriority +')');
+    }
 }

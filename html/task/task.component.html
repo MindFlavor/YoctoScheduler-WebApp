@@ -14,19 +14,36 @@
 
 <div class="table-responsive">
 	<table class="table">
-		<tr *ngFor="let task of Entities" [class.selected]="task === selectedTask" (click)="onSelect(task)">
-			<td>
-				<img [src]="taskImage(task)" [title]="task.TypeToString()">
-			</td>
-			<td>
-				<span class="label label-default">{{task.Name}}</span>
-			</td>
-			<td>
-				<img *ngIf="task.ReenqueueOnDead" src="html/imgs/redo_16x16.png" title="Auto reenqueue if hosting server dies: enabled">
-				<img *ngIf="!task.ReenqueueOnDead" src="html/imgs/redo_16x16_bw.png" title="auto reenqueue if hosting server dies: disabled">
-			</td>
-			<td><span class="label label-primary">{{concurrencyToString(task)}}</span></td>
-		</tr>
+		<thead>
+			<tr>
+				<th>Type</th>
+				<th>Name</th>
+				<th>RoKT</th>
+				<th>Concurrency</th>
+				<th>Commands</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let task of Entities" [class.selected]="task === selectedTask" (click)="onSelect(task)">
+				<td>
+					<img [src]="taskImage(task)" [title]="task.TypeToString()">
+				</td>
+				<td>
+					<span class="label label-default">{{task.Name}}</span>
+				</td>
+				<td>
+					<img *ngIf="task.ReenqueueOnDead" src="html/imgs/redo_16x16.png" title="Auto reenqueue if hosting server dies: enabled">
+					<img *ngIf="!task.ReenqueueOnDead" src="html/imgs/redo_16x16_bw.png" title="auto reenqueue if hosting server dies: disabled">
+				</td>
+				<td><span class="label label-primary">{{concurrencyToString(task)}}</span></td>
+				<td>
+					<div class="btn-group">
+						<button type="button" class="btn btn-default" title="Send to queue (normal priority)" (click)="sendToQueue(task, false)"><img src="html/imgs/send_to_queue_24x24.png" /></button>
+						<button type="button" class="btn btn-default" title="Send to queue (high priority)" (click)="sendToQueue(task, false)"><img src="html/imgs/send_to_queue_critical_24x24.png" /></button>
+					</div>
+				</td>
+			</tr>
+		</tbody>
 	</table>
 </div>
 
