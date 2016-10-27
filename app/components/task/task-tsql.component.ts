@@ -4,7 +4,7 @@ import { TSQLTask } from '../../entities/tsql-task';
 
 @Component({
     selector: 'task-tsql',
-    templateUrl: '../../html/task/tsql/task-tsql.component.html',
+    templateUrl: '../../html/task/task-tsql.component.html',
 })
 export class TaskTSQLComponent {
     @Input()

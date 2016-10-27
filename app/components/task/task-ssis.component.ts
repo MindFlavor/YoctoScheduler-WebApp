@@ -4,7 +4,7 @@ import { SSISTask } from '../../entities/ssis-task';
 
 @Component({
     selector: 'task-ssis',
-    templateUrl: '../../html/task/ssis/task-ssis.component.html',
+    templateUrl: '../../html/task/task-ssis.component.html',
 })
 export class TaskSSISComponent {
     @Input()

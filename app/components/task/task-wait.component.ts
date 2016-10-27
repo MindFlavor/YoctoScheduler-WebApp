@@ -4,7 +4,7 @@ import { WaitTask } from '../../entities/wait-task';
 
 @Component({
     selector: 'task-wait',
-    templateUrl: '../../html/task/wait/task-wait.component.html',
+    templateUrl: '../../html/task/task-wait.component.html',
 })
 export class TaskWaitComponent {
     @Input()

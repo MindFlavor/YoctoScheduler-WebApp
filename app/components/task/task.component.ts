@@ -23,7 +23,7 @@ export class TaskComponent extends GenericComponent<Task, number> {
     selectedTask: Task;
     taskType = TaskType;
 
-    constructor(private taskService: MockTaskService) {
+    constructor(private taskService: TaskService) {
         super(taskService, 0);
     }
 

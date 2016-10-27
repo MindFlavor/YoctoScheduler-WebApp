@@ -4,7 +4,7 @@ import { PowerShellTask } from '../../entities/powershell-task';
 
 @Component({
     selector: 'task-powershell',
-    templateUrl: '../../html/task/powershell/task-powershell.component.html',
+    templateUrl: '../../html/task/task-powershell.component.html',
 })
 export class TaskPowerShellComponent {
     @Input()
