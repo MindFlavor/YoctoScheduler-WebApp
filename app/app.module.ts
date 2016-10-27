@@ -6,10 +6,10 @@ import { AppComponent }                     from './app.component';
 import { routing, routedComponents }        from './app.routing';
 import { ServerDetailComponent }            from './components/server/server-detail.component';
 import { TaskDetailComponent }              from './components/task/task-detail.component';
-import { TaskWaitComponent }                from './components/task/wait/task-wait.component';
-import { TaskTSQLComponent }                from './components/task/tsql/task-tsql.component';
-import { TaskPowerShellComponent }          from './components/task/powershell/task-powershell.component';
-import { TaskSSISComponent }                from './components/task/ssis/task-ssis.component';
+import { TaskWaitComponent }                from './components/task/task-wait.component';
+import { TaskTSQLComponent }                from './components/task/task-tsql.component';
+import { TaskPowerShellComponent }          from './components/task/task-powershell.component';
+import { TaskSSISComponent }                from './components/task/task-ssis.component';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule, routing ],

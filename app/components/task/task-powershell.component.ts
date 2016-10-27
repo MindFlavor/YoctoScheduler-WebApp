@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Task, TaskType } from '../../../entities/task';
-import { PowerShellTask } from '../../../entities/powershell-task';
+import { Task, TaskType } from '../../entities/task';
+import { PowerShellTask } from '../../entities/powershell-task';
 
 @Component({
     selector: 'task-powershell',
