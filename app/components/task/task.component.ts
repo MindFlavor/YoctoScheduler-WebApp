@@ -1,18 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { GenericHTTPService } from '../../generics/generic_http.service';
+import { GenericHTTPService } from '../../services/generic_http.service';
 import { HttpModule } from '@angular/http';
 
 import { Observable, Subscription } from 'rxjs/Rx';
 
-import { Task, TaskType } from './task';
-import { WaitTask } from './wait/wait-task';
-import { TSQLTask } from './tsql/tsql-task';
-import { PowerShellTask } from './powershell/powershell-task';
-import { SSISTask } from './ssis/ssis-task';
+import { Task, TaskType } from '../../entities/task';
+import { WaitTask } from '../../entities/wait-task';
+import { TSQLTask } from '../../entities/tsql-task';
+import { PowerShellTask } from '../../entities/powershell-task';
+import { SSISTask } from '../../entities/ssis-task';
 
-import { TaskService, MockTaskService } from './task.service';
+import { TaskService, MockTaskService } from '../../services/task.service';
 
-import { GenericComponent } from '../../generics/generic.component';
+import { GenericComponent } from '../generic.component';
 
 @Component({
     selector: 'yocto-servers',

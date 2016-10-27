@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpModule, Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import { EntityWithID } from './entity_with_id';
+import { EntityWithID } from '../entities/entity_with_id';
 import { GenericService } from './generic.service';
 
 @Injectable()

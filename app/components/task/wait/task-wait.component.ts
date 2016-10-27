@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Task, TaskType } from '../task';
-import { WaitTask } from './wait-task';
+import { Task, TaskType } from '../../../entities/task';
+import { WaitTask } from '../../../entities/wait-task';
 
 @Component({
     selector: 'task-wait',

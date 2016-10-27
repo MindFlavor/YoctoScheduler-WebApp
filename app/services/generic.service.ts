@@ -1,4 +1,4 @@
-import { EntityWithID } from './entity_with_id';
+import { EntityWithID } from '../entities/entity_with_id';
 
 export interface GenericService<T extends EntityWithID<K>, K> {
     getFromREST(): Promise<T[]>;

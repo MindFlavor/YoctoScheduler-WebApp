@@ -1,4 +1,4 @@
-import { EntityWithID } from '../../generics/entity_with_id';
+import { EntityWithID } from './entity_with_id';
 
 export enum TaskType {
     Generic,

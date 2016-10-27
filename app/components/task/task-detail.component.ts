@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { Task, TaskType } from './task';
-import { TaskService, MockTaskService } from './task.service'
+import { Task, TaskType } from '../../entities/task';
+import { TaskService, MockTaskService } from '../../services/task.service'
 
 @Component({
     selector: 'task-detail',

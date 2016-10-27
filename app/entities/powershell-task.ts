@@ -1,4 +1,4 @@
-import { Task, TaskFromWS, TaskType } from '../task';
+import { Task, TaskFromWS, TaskType } from './task';
 
 export class PowerShellTask extends Task {
     Script: string;

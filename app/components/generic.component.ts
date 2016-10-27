@@ -3,8 +3,8 @@ import { HttpModule } from '@angular/http';
 
 import { Observable, Subscription } from 'rxjs/Rx';
 
-import { GenericService } from './generic.service';
-import { EntityWithID } from './entity_with_id';
+import { GenericService } from '../services/generic.service';
+import { EntityWithID } from '../entities/entity_with_id';
 
 @Component({
     selector: 'dummy',

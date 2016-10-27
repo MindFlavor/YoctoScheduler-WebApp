@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import { Task, TaskFromWS, TaskType } from './task';
-import { WaitTask } from './wait/wait-task';
-import { TSQLTask } from './tsql/tsql-task';
-import { PowerShellTask } from './powershell/powershell-task';
-import { SSISTask } from './ssis/ssis-task';
+import { Task, TaskFromWS, TaskType } from '../entities/task';
+import { WaitTask } from '../entities/wait-task';
+import { TSQLTask } from '../entities/tsql-task';
+import { PowerShellTask } from '../entities/powershell-task';
+import { SSISTask } from '../entities/ssis-task';
 
-import { GenericHTTPService } from '../../generics/generic_http.service'
-import { GenericService } from '../../generics/generic.service'
-import { GenericMockService } from '../../generics/generic_mock.service'
+import { GenericHTTPService } from './generic_http.service'
+import { GenericService } from './generic.service'
+import { GenericMockService } from './generic_mock.service'
 
 @Injectable()
 export class TaskService extends GenericHTTPService<Task, number> {

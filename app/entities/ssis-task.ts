@@ -1,4 +1,4 @@
-import { Task, TaskFromWS, TaskType } from '../task';
+import { Task, TaskFromWS, TaskType } from './task';
 
 export class SSISTask extends Task {
     Use32Bit: boolean;

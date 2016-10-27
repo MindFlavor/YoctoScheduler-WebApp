@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Server } from './server';
+import { Server } from '../../entities/server';
 
 @Component({
     selector: 'server-detail',

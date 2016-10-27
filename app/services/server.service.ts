@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import { Server } from './server';
+import { Server } from '../entities/server';
 
-import { GenericHTTPService } from '../../generics/generic_http.service'
-import { GenericService } from '../../generics/generic.service'
-import { GenericMockService } from '../../generics/generic_mock.service'
+import { GenericHTTPService } from './generic_http.service'
+import { GenericService } from './generic.service'
+import { GenericMockService } from './generic_mock.service'
 
 @Injectable()
 export class ServerService extends GenericHTTPService<Server, number> {
