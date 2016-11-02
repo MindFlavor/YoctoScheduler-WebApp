@@ -1,5 +1,7 @@
 import { EntityWithID } from './entity_with_id';
 
+export type TaskID = number;
+
 export enum TaskType {
     Generic,
     Wait,
@@ -11,7 +13,7 @@ export enum TaskType {
 }
 
 export interface TaskFromWS {
-    ID: number;
+    ID: TaskID;
     Name: string;
     ConcurrencyLimitGlobal: number;
     ConcurrencyLimitSameInstance: number;
@@ -22,7 +24,7 @@ export interface TaskFromWS {
 }
 
 export class Task {
-    ID: number;
+    ID: TaskID;
     Name: string;
     ConcurrencyLimitGlobal: number;
     ConcurrencyLimitSameInstance: number;

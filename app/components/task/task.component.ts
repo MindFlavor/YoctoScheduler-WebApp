@@ -4,26 +4,31 @@ import { HttpModule } from '@angular/http';
 
 import { Observable, Subscription } from 'rxjs/Rx';
 
-import { Task, TaskType } from '../../entities/task';
+import { Task, TaskType, TaskID } from '../../entities/task';
 import { WaitTask } from '../../entities/wait-task';
 import { TSQLTask } from '../../entities/tsql-task';
 import { PowerShellTask } from '../../entities/powershell-task';
 import { SSISTask } from '../../entities/ssis-task';
 
+import { QueueItem } from '../../entities/queue_item';
+
 import { TaskService, MockTaskService } from '../../services/task.service';
+import { QueueItemService } from '../../services/queue_item.service';
 
 import { GenericComponent } from '../generic.component';
 
 @Component({
     selector: 'yocto-servers',
     templateUrl: '../html/task/task.component.html',
-    providers: [TaskService, MockTaskService]
+    providers: [
+        TaskService, MockTaskService,
+        QueueItemService]
 })
 export class TaskComponent extends GenericComponent<Task, number> {
     selectedTask: Task;
     taskType = TaskType;
 
-    constructor(private taskService: TaskService) {
+    constructor(private taskService: TaskService, private queueItemService: QueueItemService) {
         super(taskService, 0);
     }
 
@@ -73,6 +78,14 @@ export class TaskComponent extends GenericComponent<Task, number> {
     }
 
     public sendToQueue(t: Task, highPriority: boolean) {
-        console.log('requested sendToQueue(t: ' + t + ', highPriority:' + highPriority +')');
+        console.log('requested sendToQueue(t: ' + t + ', highPriority:' + highPriority + ')');
+
+        let qi: QueueItem = new QueueItem(undefined, t.ID, 100);
+
+        this.queueItemService.save(qi).then((res) => {
+            console.log('done!');
+        }).catch((ex) => {
+            console.log('ex! ' + ex);
+        });
     }
 }
