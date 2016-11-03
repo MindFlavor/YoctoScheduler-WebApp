@@ -12,12 +12,12 @@ import { GenericComponent } from '../generic.component';
 @Component({
     selector: 'yocto-servers',
     templateUrl: '../html/server/server.component.html',
-    providers: [MockServerService]
+    providers: [ServerService, MockServerService]
 })
 export class ServerComponent extends GenericComponent<Server, number> {
     selectedServer: Server;
 
-    constructor(private serverService: MockServerService) {
+    constructor(private serverService: ServerService) {
         super(serverService, 0);
     }
 
