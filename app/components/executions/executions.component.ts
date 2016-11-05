@@ -5,8 +5,8 @@ import { HttpModule } from '@angular/http';
 import { Observable, Subscription } from 'rxjs/Rx';
 
 import { QueueItem } from '../../entities/queue_item';
-import { ItemWithStatus, DeadExecution } from '../../entities/executions';
-import { DeadExecutionService } from '../../services/executions/dead_executions.service';
+import { ItemWithTaskStatus, DeadExecution } from '../../entities/executions';
+import { DeadExecutionService, DeadExecutionService_Mock } from '../../services/executions/dead_executions.service';
 import { TaskStatus } from '../../entities/task_status';
 
 import { GenericComponent } from '../generic.component';
@@ -14,7 +14,7 @@ import { GenericComponent } from '../generic.component';
 @Component({
     selector: 'yocto-executions',
     templateUrl: '../html/executions/executions.component.html',
-    providers: [DeadExecutionService]
+    providers: [DeadExecutionService, DeadExecutionService_Mock]
 })
 export class ExecutionsComponent implements OnInit, OnDestroy {
     protected pollingInterval: number;
@@ -23,7 +23,7 @@ export class ExecutionsComponent implements OnInit, OnDestroy {
     protected deadExecutions: DeadExecution[];
     protected deadExecutionCompleted: number;
 
-    constructor(private deadExecutionService: DeadExecutionService) {
+    constructor(private deadExecutionService: DeadExecutionService_Mock) {
         this.pollingInterval = 0;
 
         console.log('creating ExecutionsComponent with service: ' + this.deadExecutionService + '. pollingInterval == ' + this.pollingInterval);
