@@ -18,11 +18,14 @@ import { GenericComponent } from '../generic.component';
 })
 export class ExecutionsComponent implements OnInit, OnDestroy {
     protected TaskStatus = TaskStatus;
+
     protected pollingInterval: number;
     protected polling: Subscription;
 
-    protected deadExecutions: ItemWithTaskStatusPartitionedByStatus<string>; 
+    protected deadExecutions: ItemWithTaskStatusPartitionedByStatus<string>;
     protected deadExecutionCompleted: number;
+
+    selectedTaskStatus: TaskStatus = TaskStatus.Unknown;
 
     constructor(private deadExecutionService: DeadExecutionService_Mock) {
         this.pollingInterval = 0;
@@ -53,5 +56,14 @@ export class ExecutionsComponent implements OnInit, OnDestroy {
                 //this.deadExecutionCompleted = this.deadExecutions[TaskStatus.Completed].length;
             })
             .catch((e) => console.log('Something went wrong: ' + e + '!'));
+    }
+
+    public selectTaskStatus(ts: TaskStatus) {
+        this.selectedTaskStatus = ts;
+    }
+
+    public isTaskStatusSelected(ts: TaskStatus) {
+        //TODO!!!!
+        return ts = this.selectTaskStatus;
     }
 }
