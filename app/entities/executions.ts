@@ -4,18 +4,23 @@ import { ScheduleID } from './schedule';
 import { TaskStatus } from './task_status';
 import { ServerID } from './server';
 
+export type ItemWithTaskStatusPartitionedByStatus<T> = { [status: number]: ItemWithTaskStatus<T>[] };
+
 export abstract class ItemWithTaskStatus<T> implements EntityWithID<T> {
     ID: T;
     Status: TaskStatus;
 
-    public static partitionByStatus<T>(iws: ItemWithTaskStatus<T>[]): ItemWithTaskStatus<T>[] {
-        var map: { [status: number]: ItemWithTaskStatus<T>[] };
+    public static partitionByStatus<T>(iws: ItemWithTaskStatus<T>[]): ItemWithTaskStatusPartitionedByStatus<T> {
+        var map: ItemWithTaskStatusPartitionedByStatus<T> = {};
 
-        for(status in TaskStatus) {
-            map[status] = iws.filter((i) => i.Status === status);
+        for (status in TaskStatus) {
+            let statusNum = parseInt(status);
+            if (!isNaN(statusNum)) {
+                map[status] = iws.filter((i) => i.Status as number === statusNum);
+            }
         }
 
-        return undefined;
+        return map;
     }
 }
 

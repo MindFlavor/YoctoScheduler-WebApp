@@ -1,5 +1,19 @@
 <div *ngIf="deadExecutions">
-	<a href="#"><span class="badge">{{deadExecutions.length}}</span> Dead executions</a>
-
-    {{deadExecutionCompleted}}
+    <ul class="list-group">
+        <li class="list-group-item">
+            Completed <span class="badge">{{deadExecutions[TaskStatus.Completed].length}}</span>
+        </li>
+        <li class="list-group-item">
+            Aborted <span class="badge">{{deadExecutions[TaskStatus.Aborted].length}}</span>
+        </li>
+        <li class="list-group-item">
+            Dead <span class="badge">{{deadExecutions[TaskStatus.Dead].length}}</span>
+        </li>
+        <li class="list-group-item">
+            Exception at startup <span class="badge">{{deadExecutions[TaskStatus.ExceptionAtStartup].length}}</span>
+        </li>
+        <li class="list-group-item">
+            Exception during execution <span class="badge">{{deadExecutions[TaskStatus.ExceptionDuringExecution].length}}</span>
+        </li>
+    </ul>
 </div>

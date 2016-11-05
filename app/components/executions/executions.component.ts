@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { Observable, Subscription } from 'rxjs/Rx';
 
 import { QueueItem } from '../../entities/queue_item';
-import { ItemWithTaskStatus, DeadExecution } from '../../entities/executions';
+import { ItemWithTaskStatus, DeadExecution, ItemWithTaskStatusPartitionedByStatus } from '../../entities/executions';
 import { DeadExecutionService, DeadExecutionService_Mock } from '../../services/executions/dead_executions.service';
 import { TaskStatus } from '../../entities/task_status';
 
@@ -17,10 +17,11 @@ import { GenericComponent } from '../generic.component';
     providers: [DeadExecutionService, DeadExecutionService_Mock]
 })
 export class ExecutionsComponent implements OnInit, OnDestroy {
+    protected TaskStatus = TaskStatus;
     protected pollingInterval: number;
     protected polling: Subscription;
 
-    protected deadExecutions: DeadExecution[];
+    protected deadExecutions: ItemWithTaskStatusPartitionedByStatus<string>; 
     protected deadExecutionCompleted: number;
 
     constructor(private deadExecutionService: DeadExecutionService_Mock) {
@@ -48,9 +49,8 @@ export class ExecutionsComponent implements OnInit, OnDestroy {
     protected getData() {
         this.deadExecutionService.getFromREST()
             .then(r => {
-                this.deadExecutions = r;
-
-                this.deadExecutionCompleted = this.deadExecutions.filter((item) => { return item.Status === TaskStatus.Completed; }).length;
+                this.deadExecutions = ItemWithTaskStatus.partitionByStatus(r);
+                //this.deadExecutionCompleted = this.deadExecutions[TaskStatus.Completed].length;
             })
             .catch((e) => console.log('Something went wrong: ' + e + '!'));
     }
