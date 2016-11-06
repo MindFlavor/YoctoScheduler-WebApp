@@ -1,5 +1,8 @@
 <div *ngIf="deadExecutions">
     <ul class="list-group">
+        <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.Idle)" (click)="selectTaskStatus(TaskStatus.Idle)">
+            In queue <span class="badge">{{deadExecutions[TaskStatus.Idle].length}}</span>
+        </li>
         <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.Completed)" (click)="selectTaskStatus(TaskStatus.Completed)">
             Completed <span class="badge">{{deadExecutions[TaskStatus.Completed].length}}</span>
         </li>

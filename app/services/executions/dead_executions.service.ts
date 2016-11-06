@@ -13,7 +13,7 @@ import { GenericMockService } from '../generic_mock.service'
 @Injectable()
 export class DeadExecutionService extends GenericHTTPService<DeadExecution, string> {
     protected getUrl(): string {
-        return 'http://localhost:9000/api/deadexecutions';  // URL to web api
+        return 'http://localhost:9000/api/executions';  // URL to web api
     }
 
     public getFromREST(): Promise<DeadExecution[]> {
