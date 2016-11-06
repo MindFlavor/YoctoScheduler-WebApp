@@ -63,7 +63,6 @@ export class ExecutionsComponent implements OnInit, OnDestroy {
     }
 
     public isTaskStatusSelected(ts: TaskStatus) {
-        //TODO!!!!
-        return ts = this.selectTaskStatus;
+        return ts === this.selectedTaskStatus;
     }
 }

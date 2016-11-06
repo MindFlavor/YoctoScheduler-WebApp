@@ -1,18 +1,18 @@
 <div *ngIf="deadExecutions">
     <ul class="list-group">
-        <li class="list-group-item" (click)="selectTaskStatus(TaskStatus.Completed)">
+        <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.Completed)" (click)="selectTaskStatus(TaskStatus.Completed)">
             Completed <span class="badge">{{deadExecutions[TaskStatus.Completed].length}}</span>
         </li>
-        <li class="list-group-item" (click)="selectTaskStatus(TaskStatus.Aborted)">
+        <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.Aborted)" (click)="selectTaskStatus(TaskStatus.Aborted)">
             Aborted <span class="badge">{{deadExecutions[TaskStatus.Aborted].length}}</span>
         </li>
-        <li class="list-group-item" (click)="selectTaskStatus(TaskStatus.Dead)">
+        <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.Dead)" (click)="selectTaskStatus(TaskStatus.Dead)">
             Dead <span class="badge">{{deadExecutions[TaskStatus.Dead].length}}</span>
         </li>
-        <li class="list-group-item" (click)="selectTaskStatus(TaskStatus.ExceptionAtStartup)">
+        <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.ExceptionAtStartup)" (click)="selectTaskStatus(TaskStatus.ExceptionAtStartup)">
             Exception at startup <span class="badge">{{deadExecutions[TaskStatus.ExceptionAtStartup].length}}</span>
         </li>
-        <li class="list-group-item" (click)="selectTaskStatus(TaskStatus.ExceptionDuringExecution)">
+        <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.ExceptionDuringExecution)" (click)="selectTaskStatus(TaskStatus.ExceptionDuringExecution)">
             Exception during execution <span class="badge">{{deadExecutions[TaskStatus.ExceptionDuringExecution].length}}</span>
         </li>
     </ul>
