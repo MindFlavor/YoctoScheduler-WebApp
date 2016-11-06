@@ -1,11 +1,11 @@
-<div *ngIf="deadExecutions">
-    <div class="table-responsive">
+<div *ngIf="executions">
+    <div class="table-responsive" *ngIf="executions.length > 0">
         <table class="table">
             <thead>
                 <tr>
                     <th>Inserted</th>
-                    <th>Terminated</th>
-                    <th>Elapsed</th>
+                    <th *ngIf="executions[0].Status > 200">Last update</th>
+                    <th *ngIf="executions[0].Status > 200">Elapsed</th>
                     <th>Return code</th>
                     <th>Schd</th>
                     <th>Server ID</th>
@@ -13,10 +13,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let exec of deadExecutions">
+                <tr *ngFor="let exec of executions">
                     <td>{{exec.Inserted | date : 'yyyy/MM/dd HH:mm:ss'}}</td>
-                    <td>{{exec.LastUpdate | date : 'yyyy/MM/dd HH:mm:ss'}}</td>
-                    <td>{{exec.Elapsed/1000}} s</td>
+                    <td *ngIf="executions[0].Status > 200">{{exec.LastUpdate | date : 'yyyy/MM/dd HH:mm:ss'}}</td>
+                    <td *ngIf="executions[0].Status > 200">{{exec.Elapsed/1000}} s</td>
                     <td>{{exec.ReturnCode}}</td>
                     <td>
                         <div *ngIf="!exec.ScheduleID">

@@ -24,7 +24,7 @@ export abstract class ItemWithTaskStatus<T> implements EntityWithID<T> {
     }
 }
 
-export class DeadExecution extends ItemWithTaskStatus<string> {
+export class Execution extends ItemWithTaskStatus<string> {
     constructor(ID: string,
         Status: TaskStatus,
         public Inserted: Date,

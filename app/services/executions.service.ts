@@ -2,25 +2,24 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import { TaskID } from '../../entities/task';
-import { TaskStatus } from '../../entities/task_status';
-import { DeadExecution } from '../../entities/executions';
+import { TaskID } from '../entities/task';
+import { TaskStatus } from '../entities/task_status';
+import { Execution } from '../entities/executions';
 
-import { GenericHTTPService } from '../generic_http.service'
-import { GenericService } from '../generic.service'
-import { GenericMockService } from '../generic_mock.service'
+import { GenericHTTPService } from './generic_http.service'
+import { GenericService } from './generic.service'
+import { GenericMockService } from './generic_mock.service'
 
 @Injectable()
-export class DeadExecutionService extends GenericHTTPService<DeadExecution, string> {
+export class ExecutionService extends GenericHTTPService<Execution, string> {
     protected getUrl(): string {
         return 'http://localhost:9000/api/executions';  // URL to web api
     }
 
-    public getFromREST(): Promise<DeadExecution[]> {
+    public getFromREST(): Promise<Execution[]> {
         return super.getFromREST().then(resp => {
-            let tmp: DeadExecutionService[] = [];
             for (let i = 0; i < resp.length; i++) {
-                resp[i] = new DeadExecution(
+                resp[i] = new Execution(
                     resp[i].ID,
                     resp[i].Status,
                     new Date(resp[i].Inserted),
@@ -39,20 +38,20 @@ export class DeadExecutionService extends GenericHTTPService<DeadExecution, stri
     constructor(http: Http) { super(http); }
 }
 
-export class DeadExecutionService_Mock extends GenericMockService<DeadExecution, string> {
-    initializeData(): DeadExecution[] {
+export class ExecutionService_Mock extends GenericMockService<Execution, string> {
+    initializeData(): Execution[] {
         return [
-            new DeadExecution("a", TaskStatus.Completed, new Date("20110101"),
+            new Execution("a", TaskStatus.Completed, new Date("20110101"),
                 new Date("20110105"), "ReturnCode", undefined, 1, 1),
-            new DeadExecution("b", TaskStatus.Completed, new Date("20110101"),
+            new Execution("b", TaskStatus.Completed, new Date("20110101"),
                 new Date("20110105"), "ReturnCode", "schedule_0", 1, 1),
-            new DeadExecution("c", TaskStatus.Aborted, new Date("20110101"),
+            new Execution("c", TaskStatus.Aborted, new Date("20110101"),
                 new Date("20110105"), "ReturnCode", undefined, 1, 1),
-            new DeadExecution("d", TaskStatus.Dead, new Date("20110101"),
+            new Execution("d", TaskStatus.Dead, new Date("20110101"),
                 new Date("20110105"), "ReturnCode", undefined, 1, 1),
-            new DeadExecution("e", TaskStatus.ExceptionAtStartup, new Date("20110101"),
+            new Execution("e", TaskStatus.ExceptionAtStartup, new Date("20110101"),
                 new Date("20110105"), "ReturnCode excetartup", undefined, 1, 1),
-            new DeadExecution("f", TaskStatus.ExceptionDuringExecution, new Date("20110101"),
+            new Execution("f", TaskStatus.ExceptionDuringExecution, new Date("20110101"),
                 new Date("20110105"), "ReturnCode exceptionxceution", undefined, 1, 1)
         ];
     }

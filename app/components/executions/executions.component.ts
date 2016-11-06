@@ -5,8 +5,8 @@ import { HttpModule } from '@angular/http';
 import { Observable, Subscription } from 'rxjs/Rx';
 
 import { QueueItem } from '../../entities/queue_item';
-import { ItemWithTaskStatus, DeadExecution, ItemWithTaskStatusPartitionedByStatus } from '../../entities/executions';
-import { DeadExecutionService, DeadExecutionService_Mock } from '../../services/executions/dead_executions.service';
+import { ItemWithTaskStatus, Execution, ItemWithTaskStatusPartitionedByStatus } from '../../entities/executions';
+import { ExecutionService, ExecutionService_Mock } from '../../services/executions.service';
 import { TaskStatus } from '../../entities/task_status';
 
 import { GenericComponent } from '../generic.component';
@@ -14,7 +14,7 @@ import { GenericComponent } from '../generic.component';
 @Component({
     selector: 'yocto-executions',
     templateUrl: '../html/executions/executions.component.html',
-    providers: [DeadExecutionService, DeadExecutionService_Mock]
+    providers: [ExecutionService, ExecutionService_Mock]
 })
 export class ExecutionsComponent implements OnInit, OnDestroy {
     protected TaskStatus = TaskStatus;
@@ -22,16 +22,16 @@ export class ExecutionsComponent implements OnInit, OnDestroy {
     protected pollingInterval: number;
     protected polling: Subscription;
 
-    protected deadExecutions: ItemWithTaskStatusPartitionedByStatus<string>;
-    protected deadExecutionCompleted: number;
+    protected executions: ItemWithTaskStatusPartitionedByStatus<string>;
+    protected executionCompleted: number;
 
     selectedTaskStatus: TaskStatus = TaskStatus.Unknown;
-    selectedExecutions: DeadExecution[];
+    selectedExecutions: Execution[];
 
-    constructor(private deadExecutionService: DeadExecutionService) {
+    constructor(private executionService: ExecutionService) {
         this.pollingInterval = 5000;
 
-        console.log('creating ExecutionsComponent with service: ' + this.deadExecutionService + '. pollingInterval == ' + this.pollingInterval);
+        console.log('creating ExecutionsComponent with service: ' + this.executionService + '. pollingInterval == ' + this.pollingInterval);
 
         if (this.pollingInterval > 0) {
             this.polling = Observable.interval(this.pollingInterval)
@@ -51,7 +51,7 @@ export class ExecutionsComponent implements OnInit, OnDestroy {
     }
 
     protected getData() {
-        this.deadExecutionService.getFromREST()
+        this.executionService.getFromREST()
             .then(r => {
                 r = r.sort((a, b) => {
                     if (a.LastUpdate > b.LastUpdate)
@@ -61,10 +61,10 @@ export class ExecutionsComponent implements OnInit, OnDestroy {
                     else
                         return 0;
                 });
-                this.deadExecutions = ItemWithTaskStatus.partitionByStatus(r);
+                this.executions = ItemWithTaskStatus.partitionByStatus(r);
 
                 if (this.selectedTaskStatus)
-                    this.selectedExecutions = this.deadExecutions[this.selectedTaskStatus] as DeadExecution[];
+                    this.selectedExecutions = this.executions[this.selectedTaskStatus] as Execution[];
 
             })
             .catch((e) => console.log('Something went wrong: ' + e + '!'));
@@ -72,7 +72,7 @@ export class ExecutionsComponent implements OnInit, OnDestroy {
 
     public selectTaskStatus(ts: TaskStatus) {
         this.selectedTaskStatus = ts;
-        this.selectedExecutions = this.deadExecutions[this.selectedTaskStatus] as DeadExecution[];
+        this.selectedExecutions = this.executions[this.selectedTaskStatus] as Execution[];
     }
 
     public isTaskStatusSelected(ts: TaskStatus) {
