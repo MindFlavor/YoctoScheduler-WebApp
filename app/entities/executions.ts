@@ -8,7 +8,7 @@ export type ItemWithTaskStatusPartitionedByStatus<T> = { [status: number]: ItemW
 
 export abstract class ItemWithTaskStatus<T> implements EntityWithID<T> {
     ID: T;
-    Status: TaskStatus;
+    constructor(public Status: TaskStatus) { }
 
     public static partitionByStatus<T>(iws: ItemWithTaskStatus<T>[]): ItemWithTaskStatusPartitionedByStatus<T> {
         var map: ItemWithTaskStatusPartitionedByStatus<T> = {};
@@ -24,11 +24,20 @@ export abstract class ItemWithTaskStatus<T> implements EntityWithID<T> {
     }
 }
 
-export interface DeadExecution extends ItemWithTaskStatus<string> {
-    Inserted: Date;
-    LastUpdate: Date;
-    ReturnCode: string;
-    ScheduleID: ScheduleID;
-    ServerID: ServerID;
-    TaskID: TaskID;
+export class DeadExecution extends ItemWithTaskStatus<string> {
+    constructor(ID: string,
+        Status: TaskStatus,
+        public Inserted: Date,
+        public LastUpdate: Date,
+        public ReturnCode: string,
+        public ScheduleID: ScheduleID,
+        public ServerID: ServerID,
+        public TaskID: TaskID) {
+        super(Status)
+        this.ID = ID;
+    }
+
+    get Elapsed(): number {
+        return this.LastUpdate.getTime() - this.Inserted.getTime();
+    }
 }

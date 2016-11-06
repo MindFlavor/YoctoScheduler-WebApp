@@ -26,8 +26,9 @@ export class ExecutionsComponent implements OnInit, OnDestroy {
     protected deadExecutionCompleted: number;
 
     selectedTaskStatus: TaskStatus = TaskStatus.Unknown;
+    selectedExecutions: DeadExecution[];
 
-    constructor(private deadExecutionService: DeadExecutionService_Mock) {
+    constructor(private deadExecutionService: DeadExecutionService) {
         this.pollingInterval = 0;
 
         console.log('creating ExecutionsComponent with service: ' + this.deadExecutionService + '. pollingInterval == ' + this.pollingInterval);
@@ -52,6 +53,14 @@ export class ExecutionsComponent implements OnInit, OnDestroy {
     protected getData() {
         this.deadExecutionService.getFromREST()
             .then(r => {
+                r = r.sort((a, b) => {
+                    if (a.LastUpdate > b.LastUpdate)
+                        return -1;
+                    else if (a.LastUpdate < b.LastUpdate)
+                        return 1;
+                    else
+                        return 0;
+                });
                 this.deadExecutions = ItemWithTaskStatus.partitionByStatus(r);
                 //this.deadExecutionCompleted = this.deadExecutions[TaskStatus.Completed].length;
             })
@@ -60,6 +69,7 @@ export class ExecutionsComponent implements OnInit, OnDestroy {
 
     public selectTaskStatus(ts: TaskStatus) {
         this.selectedTaskStatus = ts;
+        this.selectedExecutions = this.deadExecutions[this.selectedTaskStatus] as DeadExecution[];
     }
 
     public isTaskStatusSelected(ts: TaskStatus) {

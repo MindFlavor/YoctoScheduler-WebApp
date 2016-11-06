@@ -1,0 +1,34 @@
+<div *ngIf="deadExecutions">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Inserted</th>
+                    <th>Terminated</th>
+                    <th>Elapsed</th>
+                    <th>Return code</th>
+                    <th>Schd</th>
+                    <th>Server ID</th>
+                    <th>Task ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let exec of deadExecutions">
+                    <td>{{exec.Inserted | date : 'yyyy/MM/dd HH:mm:ss'}}</td>
+                    <td>{{exec.LastUpdate | date : 'yyyy/MM/dd HH:mm:ss'}}</td>
+                    <td>{{exec.Elapsed/1000}} s</td>
+                    <td>{{exec.ReturnCode}}</td>
+                    <td>
+                        <div *ngIf="!exec.ScheduleID">
+                            <img src="html/imgs/send_to_queue_24x24.png" title="Direct enqueuing">
+                        </div>
+                        <div *ngIf="exec.ScheduleID">
+                            {{exec.ScheduleID}}
+                        </div>
+                    </td>
+                    <td>{{exec.ServerID}}</td>
+                    <td>{{exec.TaskID}}</td>
+                </tr>
+        </table>
+    </div>
+</div>

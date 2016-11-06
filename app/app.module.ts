@@ -10,11 +10,13 @@ import { TaskWaitComponent }                from './components/task/task-wait.co
 import { TaskTSQLComponent }                from './components/task/task-tsql.component';
 import { TaskPowerShellComponent }          from './components/task/task-powershell.component';
 import { TaskSSISComponent }                from './components/task/task-ssis.component';
+import { DeadExecutionsDetailComponent }    from './components/executions/dead-executions-detail.component';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule, routing ],
   declarations: [ AppComponent, routedComponents, ServerDetailComponent, TaskDetailComponent, TaskWaitComponent,
-                  TaskTSQLComponent, TaskPowerShellComponent, TaskSSISComponent ],
+                  TaskTSQLComponent, TaskPowerShellComponent, TaskSSISComponent, 
+                  DeadExecutionsDetailComponent ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
