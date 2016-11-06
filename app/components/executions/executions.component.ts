@@ -29,7 +29,7 @@ export class ExecutionsComponent implements OnInit, OnDestroy {
     selectedExecutions: DeadExecution[];
 
     constructor(private deadExecutionService: DeadExecutionService) {
-        this.pollingInterval = 0;
+        this.pollingInterval = 5000;
 
         console.log('creating ExecutionsComponent with service: ' + this.deadExecutionService + '. pollingInterval == ' + this.pollingInterval);
 
@@ -62,7 +62,10 @@ export class ExecutionsComponent implements OnInit, OnDestroy {
                         return 0;
                 });
                 this.deadExecutions = ItemWithTaskStatus.partitionByStatus(r);
-                //this.deadExecutionCompleted = this.deadExecutions[TaskStatus.Completed].length;
+
+                if (this.selectedTaskStatus)
+                    this.selectedExecutions = this.deadExecutions[this.selectedTaskStatus] as DeadExecution[];
+
             })
             .catch((e) => console.log('Something went wrong: ' + e + '!'));
     }
