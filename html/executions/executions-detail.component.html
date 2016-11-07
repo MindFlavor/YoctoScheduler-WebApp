@@ -32,7 +32,9 @@
                             {{exec.ScheduleID}}
                         </div>
                     </td>
-                    <td *ngIf="executions[0].Status > 200">{{exec.ServerID}}</td>
+                    <td *ngIf="executions[0].Status > 200" title="ID: {{exec.ServerID}}">
+                        {{serverByID(exec.ServerID).HostName}}
+                        </td>
                     <td>{{exec.TaskID}}</td>
                 </tr>
         </table>

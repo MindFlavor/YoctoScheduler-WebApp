@@ -26,15 +26,25 @@ export abstract class GenericHTTPService<T extends EntityWithID<K>, K> implement
             .catch(this.handleError)
     }
 
+    getAll(): Promise<T[]> {
+        if (this.tArray)
+            return new Promise((res, rej) => { res(this.tArray); })
+        else
+            return this.getFromREST();
+    }
+
     get(id: K): Promise<T> {
         if (this.tArray) {
             let v = this.tArray.find(t => t.ID === id);
-            return new Promise(function (resolve, reject) { v });
+            return new Promise((res, rej) => { 
+                console.log('calling res with: ' + v);
+                res(v); 
+            });
         }
 
         this.getFromREST().then(arr => {
             let v = arr.find(t => t.ID === id);
-            return new Promise(function (resolve, reject) { v });
+            return new Promise((res, rej) => { res(v); });
         });
     }
 

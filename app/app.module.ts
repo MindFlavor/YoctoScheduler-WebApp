@@ -12,11 +12,13 @@ import { TaskPowerShellComponent }          from './components/task/task-powersh
 import { TaskSSISComponent }                from './components/task/task-ssis.component';
 import { ExecutionsDetailComponent }    from './components/executions/executions-detail.component';
 
+import {ServerService, MockServerService } from './services/server.service'
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule, routing ],
   declarations: [ AppComponent, routedComponents, ServerDetailComponent, TaskDetailComponent, TaskWaitComponent,
                   TaskTSQLComponent, TaskPowerShellComponent, TaskSSISComponent, 
                   ExecutionsDetailComponent ],
-  bootstrap:    [ AppComponent ]
+  bootstrap:    [ AppComponent ],
+  providers:    [ServerService, MockServerService]
 })
 export class AppModule { }

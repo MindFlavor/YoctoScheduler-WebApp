@@ -7,6 +7,8 @@ import { Observable, Subscription } from 'rxjs/Rx';
 import { QueueItem } from '../../entities/queue_item';
 import { ItemWithTaskStatus, Execution, ItemWithTaskStatusPartitionedByStatus } from '../../entities/executions';
 import { ExecutionService, ExecutionService_Mock } from '../../services/executions.service';
+import { ServerService, MockServerService } from '../../services/server.service';
+
 import { TaskStatus } from '../../entities/task_status';
 
 import { GenericComponent } from '../generic.component';
@@ -28,10 +30,10 @@ export class ExecutionsComponent implements OnInit, OnDestroy {
     selectedTaskStatus: TaskStatus = TaskStatus.Unknown;
     selectedExecutions: Execution[];
 
-    constructor(private executionService: ExecutionService) {
+    constructor(private executionService: ExecutionService, private serverService: ServerService) {
         this.pollingInterval = 5000;
 
-        console.log('creating ExecutionsComponent with service: ' + this.executionService + '. pollingInterval == ' + this.pollingInterval);
+        console.log('creating ExecutionsComponent with service: ' + this.executionService + ', serverService: ' + this.serverService + ', pollingInterval: ' + this.pollingInterval);
 
         if (this.pollingInterval > 0) {
             this.polling = Observable.interval(this.pollingInterval)

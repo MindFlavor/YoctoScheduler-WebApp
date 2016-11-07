@@ -17,6 +17,8 @@ export abstract class GenericComponent<T extends EntityWithID<K>, K> implements 
     protected BeforeDataRetrieval() { }
     protected AfterDataRetrieval() { }
 
+    protected lastUpdate = Date.parse("1900-01-01");
+
     constructor(private service: GenericService<T, K>, private pollingInterval: number) {
         console.log('creating GenericComponent with service: ' + this.service + '. pollingInterval == ' + this.pollingInterval);
 
@@ -38,6 +40,15 @@ export abstract class GenericComponent<T extends EntityWithID<K>, K> implements 
     }
 
     protected getData() {
+        let elapsedMS = Date.now() - this.lastUpdate;
+        if(this.pollingInterval > 0) { // do not update until next poll event
+            if(elapsedMS < this.pollingInterval)
+                return;
+        }
+
+        // update the update time
+        this.lastUpdate = Date.now();
+        
         this.BeforeDataRetrieval();
         this.service.getFromREST()
             .then(r => {
