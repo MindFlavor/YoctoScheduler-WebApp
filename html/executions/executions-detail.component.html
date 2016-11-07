@@ -6,9 +6,10 @@
                     <th>Inserted</th>
                     <th *ngIf="executions[0].Status > 200">Last update</th>
                     <th *ngIf="executions[0].Status > 200">Elapsed</th>
-                    <th>Return code</th>
+                    <th *ngIf="executions[0].Status >= 1000">Return code</th>
+                    <th *ngIf="executions[0].Status === 100">Priority</th>
                     <th>Schd</th>
-                    <th>Server ID</th>
+                    <th *ngIf="executions[0].Status > 200">Server ID</th>
                     <th>Task ID</th>
                 </tr>
             </thead>
@@ -17,16 +18,21 @@
                     <td>{{exec.Inserted | date : 'yyyy/MM/dd HH:mm:ss'}}</td>
                     <td *ngIf="executions[0].Status > 200">{{exec.LastUpdate | date : 'yyyy/MM/dd HH:mm:ss'}}</td>
                     <td *ngIf="executions[0].Status > 200">{{exec.Elapsed/1000}} s</td>
-                    <td>{{exec.ReturnCode}}</td>
+                    <td *ngIf="executions[0].Status >= 1000">{{exec.ReturnCode}}</td>
+                    <th *ngIf="executions[0].Status === 100">
+                        <img src="html/imgs/send_to_queue_low_24x24.png" *ngIf="exec.Priority < 0" title="Low priority">
+                        <img src="html/imgs/send_to_queue_24x24.png" *ngIf="exec.Priority === 0" title="Normal priority">
+                        <img src="html/imgs/send_to_queue_critical_24x24.png" *ngIf="exec.Priority > 0" title="High priority">
+                    </th>
                     <td>
                         <div *ngIf="!exec.ScheduleID">
-                            <img src="html/imgs/send_to_queue_24x24.png" title="Direct enqueuing">
+                            <img src="html/imgs/straight_24x24.png" title="Direct enqueuing">
                         </div>
                         <div *ngIf="exec.ScheduleID">
                             {{exec.ScheduleID}}
                         </div>
                     </td>
-                    <td>{{exec.ServerID}}</td>
+                    <td *ngIf="executions[0].Status > 200">{{exec.ServerID}}</td>
                     <td>{{exec.TaskID}}</td>
                 </tr>
         </table>

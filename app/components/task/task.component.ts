@@ -16,6 +16,7 @@ import { TaskService, MockTaskService } from '../../services/task.service';
 import { QueueItemService } from '../../services/queue_item.service';
 
 import { GenericComponent } from '../generic.component';
+import { TaskPriority } from '../../entities/task_priority';
 
 @Component({
     selector: 'yocto-servers',
@@ -49,6 +50,7 @@ export class TaskComponent extends GenericComponent<Task, number> {
             case TaskType.PowerShell:
                 t = new PowerShellTask();
                 break;
+
             case TaskType.SSIS:
                 t = new SSISTask();
                 break;
@@ -80,7 +82,7 @@ export class TaskComponent extends GenericComponent<Task, number> {
     public sendToQueue(t: Task, highPriority: boolean) {
         console.log('requested sendToQueue(t: ' + t + ', highPriority:' + highPriority + ')');
 
-        let qi: QueueItem = new QueueItem(undefined, t.ID, 100);
+        let qi: QueueItem = new QueueItem(undefined, t.ID, highPriority ? TaskPriority.High : TaskPriority.Normal);
 
         this.queueItemService.save(qi).then((res) => {
             console.log('done!');

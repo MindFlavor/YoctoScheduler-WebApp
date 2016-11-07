@@ -2,6 +2,7 @@ import { EntityWithID } from './entity_with_id';
 import { TaskID } from './task';
 import { ScheduleID } from './schedule';
 import { TaskStatus } from './task_status';
+import { TaskPriority } from './task_priority'
 import { ServerID } from './server';
 
 export type ItemWithTaskStatusPartitionedByStatus<T> = { [status: number]: ItemWithTaskStatus<T>[] };
@@ -32,6 +33,7 @@ export class Execution extends ItemWithTaskStatus<string> {
         public ReturnCode: string,
         public ScheduleID: ScheduleID,
         public ServerID: ServerID,
+        public Priority: TaskPriority | undefined,
         public TaskID: TaskID) {
         super(Status)
         this.ID = ID;

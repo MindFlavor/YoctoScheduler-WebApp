@@ -27,6 +27,7 @@ export class ExecutionService extends GenericHTTPService<Execution, string> {
                     resp[i].ReturnCode,
                     resp[i].ScheduleID,
                     resp[i].ServerID,
+                    resp[i].Priority,
                     resp[i].TaskID
                 );
             }
@@ -42,17 +43,17 @@ export class ExecutionService_Mock extends GenericMockService<Execution, string>
     initializeData(): Execution[] {
         return [
             new Execution("a", TaskStatus.Completed, new Date("20110101"),
-                new Date("20110105"), "ReturnCode", undefined, 1, 1),
+                new Date("20110105"), "ReturnCode", undefined, 1, undefined, 1),
             new Execution("b", TaskStatus.Completed, new Date("20110101"),
-                new Date("20110105"), "ReturnCode", "schedule_0", 1, 1),
+                new Date("20110105"), "ReturnCode", "schedule_0", 1, undefined, 1),
             new Execution("c", TaskStatus.Aborted, new Date("20110101"),
-                new Date("20110105"), "ReturnCode", undefined, 1, 1),
+                new Date("20110105"), "ReturnCode", undefined, 1, undefined, 1),
             new Execution("d", TaskStatus.Dead, new Date("20110101"),
-                new Date("20110105"), "ReturnCode", undefined, 1, 1),
+                new Date("20110105"), "ReturnCode", undefined, 1, undefined, 1),
             new Execution("e", TaskStatus.ExceptionAtStartup, new Date("20110101"),
-                new Date("20110105"), "ReturnCode excetartup", undefined, 1, 1),
+                new Date("20110105"), "ReturnCode excetartup", undefined, 1, undefined, 1),
             new Execution("f", TaskStatus.ExceptionDuringExecution, new Date("20110101"),
-                new Date("20110105"), "ReturnCode exceptionxceution", undefined, 1, 1)
+                new Date("20110105"), "ReturnCode exceptionxceution", undefined, 1, undefined, 1)
         ];
     }
 }
