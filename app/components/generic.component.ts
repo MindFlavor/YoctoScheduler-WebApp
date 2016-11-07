@@ -53,7 +53,7 @@ export abstract class GenericComponent<T extends EntityWithID<K>, K> implements 
         this.service.getFromREST()
             .then(r => {
                 this.Entities = r;
-                this.Entities.map(tsk => console.log(tsk));
+                // this.Entities.map(tsk => console.log(tsk));
                 this.AfterDataRetrieval();
             })
             .catch((e) => console.log('Something went wrong: ' + e + '!'));

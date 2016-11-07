@@ -20,6 +20,10 @@ export class TaskService extends GenericHTTPService<Task, number> {
         return 'http://localhost:9000/api/tasks';  // URL to web api
     }
 
+    public toString() : string {
+        return "TaskService";
+    }
+
     getFromREST(): Promise<Task[]> {
         return this.http.get(this.getUrl())
             .toPromise()
@@ -32,7 +36,7 @@ export class TaskService extends GenericHTTPService<Task, number> {
                 objs.map(obj => _tArray.push(obj as TaskFromWS));
 
                 _tArray.map(obj => {
-                    console.log(obj);
+                    // console.log(obj);
                     switch (obj.Type) {
                         case "WaitTask":
                             this.tArray.push(WaitTask.fromTaskFromWS(obj));

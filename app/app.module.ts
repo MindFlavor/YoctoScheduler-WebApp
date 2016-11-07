@@ -10,15 +10,17 @@ import { TaskWaitComponent }                from './components/task/task-wait.co
 import { TaskTSQLComponent }                from './components/task/task-tsql.component';
 import { TaskPowerShellComponent }          from './components/task/task-powershell.component';
 import { TaskSSISComponent }                from './components/task/task-ssis.component';
-import { ExecutionsDetailComponent }    from './components/executions/executions-detail.component';
+import { ExecutionsDetailComponent }        from './components/executions/executions-detail.component';
 
-import {ServerService, MockServerService } from './services/server.service'
+import { ServerService, MockServerService } from './services/server.service';
+import { TaskService, MockTaskService  }    from './services/task.service';
+
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule, routing ],
   declarations: [ AppComponent, routedComponents, ServerDetailComponent, TaskDetailComponent, TaskWaitComponent,
                   TaskTSQLComponent, TaskPowerShellComponent, TaskSSISComponent, 
                   ExecutionsDetailComponent ],
   bootstrap:    [ AppComponent ],
-  providers:    [ServerService, MockServerService]
+  providers:    [ ServerService, MockServerService, TaskService, MockTaskService ]
 })
 export class AppModule { }

@@ -27,10 +27,14 @@ export abstract class GenericHTTPService<T extends EntityWithID<K>, K> implement
     }
 
     getAll(): Promise<T[]> {
-        if (this.tArray)
+        if (this.tArray) {
+            console.log(this + '.getAll() from cache');
             return new Promise((res, rej) => { res(this.tArray); })
-        else
-            return this.getFromREST();
+        }
+        else {
+            console.log(this + '.getAll() performing REST call');
+           return this.getFromREST();
+        }
     }
 
     get(id: K): Promise<T> {
