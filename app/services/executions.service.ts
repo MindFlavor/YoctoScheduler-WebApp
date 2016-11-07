@@ -13,7 +13,7 @@ import { GenericMockService } from './generic_mock.service'
 @Injectable()
 export class ExecutionService extends GenericHTTPService<Execution, string> {
     protected getUrl(): string {
-        return 'http://localhost:9000/api/executions';  // URL to web api
+        return GenericHTTPService.BASE_URL + '/executions';  // URL to web api
     }
 
     public getFromREST(): Promise<Execution[]> {

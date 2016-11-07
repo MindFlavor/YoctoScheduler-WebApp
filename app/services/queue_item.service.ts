@@ -12,7 +12,7 @@ import { GenericMockService } from './generic_mock.service'
 @Injectable()
 export class QueueItemService extends GenericHTTPService<QueueItem, string> {
     protected getUrl(): string {
-        return 'http://localhost:9000/api/queueitems';  // URL to web api
+         return GenericHTTPService.BASE_URL + '/queueitems';  // URL to web api
     }
 
     constructor(http: Http) { super(http); }

@@ -1,15 +1,27 @@
-<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-	<div class="navbar-brand" routerLink="/servers">YoctoScheduler 3.0</div>
-	<ul class="nav navbar-nav">
-		<li class="nav-item active">
-			<a routerLink="/servers">Servers <span class="sr-only">(current)</span></a>
-		</li>
-		<li class="nav-item">
-			<a routerLink="/tasks">Tasks</a>
-		</li>	
-		<li class="nav-item">
-			<a routerLink="/executions">Executions</a>
-		</li>
-	</ul>
+<nav class="navbar navbar-default" role="navigation">
+	<div class="navbar-header">
+		<a class="navbar-brand" routerLink="/executions">
+			<img src="html/imgs/yocto_20x20.png" />			
+		</a>
+		<a class="navbar-brand" routerLink="/executions">YoctoScheduler v3.0</a>
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>     
+        </button>
+	</div>
+	<div class="navbar-collapse collapse">
+		<ul class="nav navbar-nav navbar-left">
+			<li class="nav-item" [routerLinkActive]="['active']">
+				<a routerLink="/servers">Servers <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item" [routerLinkActive]="['active']">
+				<a routerLink="/tasks">Tasks</a>
+			</li>
+			<li class="nav-item" [routerLinkActive]="['active']">
+				<a routerLink="/executions">Executions</a>
+			</li>
+		</ul>
+	</div>
 </nav>
 <router-outlet></router-outlet>

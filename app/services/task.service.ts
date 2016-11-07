@@ -17,7 +17,7 @@ export class TaskService extends GenericHTTPService<Task, number> {
     constructor(http: Http) { super(http); }
 
     protected getUrl(): string {
-        return 'http://localhost:9000/api/tasks';  // URL to web api
+        return GenericHTTPService.BASE_URL + '/tasks';  // URL to web api
     }
 
     public toString() : string {
