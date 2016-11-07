@@ -1,0 +1,47 @@
+<div *ngIf="executions">
+    <div class="table-responsive" *ngIf="executions.length > 0">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th *ngIf="executions[0].Status > 200">Server</th>
+                    <th>Enq</th>
+                    <th>Inserted</th>
+                    <th *ngIf="executions[0].Status > 200 || executions[0].Status === -100">Last update</th>
+                    <th *ngIf="executions[0].Status > 200">Elapsed</th>
+                    <th *ngIf="executions[0].Status >= 1000 || executions[0].Status <= -3000">Return code</th>
+                    <th *ngIf="executions[0].Status === 100">Priority</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let exec of executions">
+                    <td title="TaskID: {{exec.TaskID}}">
+                        <span class="label label-primary">{{taskByID(exec.TaskID).Name}}</span>
+                    </td>
+                    <td *ngIf="executions[0].Status > 200" title="ServerID: {{exec.ServerID}}">
+                        <span class="label label-default">{{serverByID(exec.ServerID).HostName}}</span>
+                    </td>
+                    <td>
+                        <div *ngIf="!exec.ScheduleID">
+                            <img src="html/imgs/straight_24x24.png" title="Direct enqueuing">
+                        </div>
+                        <div *ngIf="exec.ScheduleID">
+                            {{exec.ScheduleID}}
+                        </div>
+                    </td>
+
+                    <td>{{exec.Inserted | date : 'yyyy/MM/dd HH:mm:ss'}}</td>
+                    <td *ngIf="executions[0].Status > 200 || executions[0].Status === -100">{{exec.LastUpdate | date : 'yyyy/MM/dd HH:mm:ss'}}</td>
+                    <td *ngIf="executions[0].Status > 200">{{exec.Elapsed/1000}} s</td>
+                    <td *ngIf="executions[0].Status >= 1000 || executions[0].Status <= -3000">
+                        {{exec.ReturnCode}}
+                    </td>
+                    <th *ngIf="executions[0].Status === 100">
+                        <img src="html/imgs/send_to_queue_low_24x24.png" *ngIf="exec.Priority < 0" title="Low priority">
+                        <img src="html/imgs/send_to_queue_24x24.png" *ngIf="exec.Priority === 0" title="Normal priority">
+                        <img src="html/imgs/send_to_queue_critical_24x24.png" *ngIf="exec.Priority > 0" title="High priority">
+                    </th>
+                </tr>
+        </table>
+    </div>
+</div>

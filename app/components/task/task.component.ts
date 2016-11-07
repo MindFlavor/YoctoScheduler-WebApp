@@ -16,16 +16,16 @@ import { TaskService, MockTaskService } from '../../services/task.service';
 import { QueueItemService } from '../../services/queue_item.service';
 
 import { GenericComponent } from '../generic.component';
+import { TaskPriority } from '../../entities/task_priority';
 
 @Component({
     selector: 'yocto-servers',
     templateUrl: '../html/task/task.component.html',
-    providers: [
-        TaskService, MockTaskService,
-        QueueItemService]
+    providers: [ QueueItemService ]
 })
 export class TaskComponent extends GenericComponent<Task, number> {
     selectedTask: Task;
+    taskPriority = TaskPriority;
     taskType = TaskType;
 
     constructor(private taskService: TaskService, private queueItemService: QueueItemService) {
@@ -49,6 +49,7 @@ export class TaskComponent extends GenericComponent<Task, number> {
             case TaskType.PowerShell:
                 t = new PowerShellTask();
                 break;
+
             case TaskType.SSIS:
                 t = new SSISTask();
                 break;
@@ -77,10 +78,10 @@ export class TaskComponent extends GenericComponent<Task, number> {
         return `[${sLocal}/${sGlobal}]`;
     }
 
-    public sendToQueue(t: Task, highPriority: boolean) {
-        console.log('requested sendToQueue(t: ' + t + ', highPriority:' + highPriority + ')');
+    public sendToQueue(t: Task, priority: TaskPriority) {
+        console.log('requested sendToQueue(t: ' + t + ', priority:' + priority + ')');
 
-        let qi: QueueItem = new QueueItem(undefined, t.ID, 100);
+        let qi: QueueItem = new QueueItem(undefined, t.ID, priority);
 
         this.queueItemService.save(qi).then((res) => {
             console.log('done!');

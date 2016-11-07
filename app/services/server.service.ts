@@ -15,6 +15,10 @@ export class ServerService extends GenericHTTPService<Server, number> {
     }
 
     constructor(http: Http) { super(http); }
+
+    public toString() : string {
+        return "ServerService";
+    }
 }
 
 @Injectable()

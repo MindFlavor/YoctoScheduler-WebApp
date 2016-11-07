@@ -1,15 +1,11 @@
-import { ModuleWithProviders }      from '@angular/core';
-import { Routes, RouterModule }     from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { ServerComponent }          from './components/server/server.component';
-import { TaskComponent }            from './components/task/task.component';
-import { SampleComponent }          from './sample/sample.component';
+import { ServerComponent } from './components/server/server.component';
+import { TaskComponent } from './components/task/task.component';
+import { ExecutionsComponent } from './components/executions/executions.component';
 
 const appRoutes: Routes = [
-  {
-    path: 'sample',
-    component: SampleComponent
-  },
   {
     path: 'servers',
     component: ServerComponent
@@ -19,6 +15,10 @@ const appRoutes: Routes = [
     component: TaskComponent
   },
   {
+    path: 'executions',
+    component: ExecutionsComponent
+  },
+  {
     path: '',
     component: ServerComponent
   }
@@ -26,4 +26,4 @@ const appRoutes: Routes = [
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 
-export const routedComponents = [SampleComponent, ServerComponent, TaskComponent];
+export const routedComponents = [ServerComponent, TaskComponent, ExecutionsComponent];

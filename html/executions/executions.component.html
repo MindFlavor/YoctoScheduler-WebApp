@@ -1,0 +1,33 @@
+<div *ngIf="executions">
+    <ul class="list-group">
+        <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.Idle)" (click)="selectTaskStatus(TaskStatus.Idle)"
+            *ngIf="executions[TaskStatus.Idle].length > 0">
+            In queue <span class="badge">{{executions[TaskStatus.Idle].length}}</span>
+        </li>
+        <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.Running)" (click)="selectTaskStatus(TaskStatus.Running)"
+            *ngIf="executions[TaskStatus.Running].length > 0">
+            Running <span class="badge">{{executions[TaskStatus.Running].length}}</span>
+        </li>
+        <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.Completed)" (click)="selectTaskStatus(TaskStatus.Completed)">
+            Completed <span class="badge">{{executions[TaskStatus.Completed].length}}</span>
+        </li>
+        <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.Aborted)" (click)="selectTaskStatus(TaskStatus.Aborted)"
+            *ngIf="executions[TaskStatus.Aborted].length > 0">
+            Aborted <span class="badge">{{executions[TaskStatus.Aborted].length}}</span>
+        </li>
+        <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.Dead)" (click)="selectTaskStatus(TaskStatus.Dead)"
+            *ngIf="executions[TaskStatus.Dead].length > 0">
+            Dead <span class="badge">{{executions[TaskStatus.Dead].length}}</span>
+        </li>
+        <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.ExceptionAtStartup)" (click)="selectTaskStatus(TaskStatus.ExceptionAtStartup)"
+            *ngIf="executions[TaskStatus.ExceptionAtStartup].length > 0">
+            Exception (startup) <span class="badge">{{executions[TaskStatus.ExceptionAtStartup].length}}</span>
+        </li>
+        <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.ExceptionDuringExecution)" (click)="selectTaskStatus(TaskStatus.ExceptionDuringExecution)"
+            *ngIf="executions[TaskStatus.ExceptionDuringExecution].length > 0">
+            Exception (execution) <span class="badge">{{executions[TaskStatus.ExceptionDuringExecution].length}}</span>
+        </li>
+    </ul>
+    <executions-detail [executions]="selectedExecutions">
+    </executions-detail>
+</div>

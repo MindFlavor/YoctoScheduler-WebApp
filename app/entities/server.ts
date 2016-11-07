@@ -1,5 +1,7 @@
+export type ServerID = number;
+
 export interface Server {
-    ID: number,
+    ID: ServerID,
     HostName: string,
     Description: string,
     Status: number,
