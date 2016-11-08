@@ -21,8 +21,6 @@ export class SecretService extends GenericHTTPService<Secret, string> {
         return GenericHTTPService.BASE_URL + "/encryptedsecretitems";
     }
 
-
-
     public toString(): string {
         return "SecretService";
     }
@@ -75,27 +73,14 @@ export class SecretService extends GenericHTTPService<Secret, string> {
             'Content-Type': 'application/json'
         });
 
-        let my_url = 'http://localhost:9000/api/plaintextsecretitems';
-        let json = JSON.stringify(t);
-
         return this.http
-            // .get(my_url, { headers: headers })
-            .post(my_url, json, { headers: headers })
+            .post(this.getUrlPlainText(), JSON.stringify(t), { headers: headers })
             .toPromise()
             .then(res => {
                 console.log('wow!');
                 return res.json().data
             })
             .catch(this.handleError);
-
-        // return this.http
-        //     .post(my_url, json, { headers: headers })
-        //     .toPromise()
-        //     .then(res => {
-        //         console.log('wow!');
-        //         return res.json().data
-        //     })
-        //     .catch(this.handleError);
     }
 
     public put(t: PlainTextSecret): Promise<PlainTextSecret> {

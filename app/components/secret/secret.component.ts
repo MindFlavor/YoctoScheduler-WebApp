@@ -47,6 +47,8 @@ export class SecretComponent implements OnInit {
             return;
         }
         this.newSecret = new CompleteSecret('', '', '', '');
+        if (!this.secrets)
+            this.secrets = [];
         this.secrets.push(
             this.newSecret
         );
