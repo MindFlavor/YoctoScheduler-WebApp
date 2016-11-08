@@ -9,7 +9,7 @@ import { GenericService } from './generic.service';
 export abstract class GenericHTTPService<T extends EntityWithID<K>, K> implements GenericService<T, K>  {
     
     // public static BASE_URL = 'http://localhost:9000/api';
-    public static BASE_URL = 'http://cantun.mindflavor.it:9000/api';
+    public static BASE_URL = 'http://frcognozbook:9000/api';
 
     protected abstract getUrl(): string;
 

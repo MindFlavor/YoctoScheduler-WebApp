@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ServerComponent } from './components/server/server.component';
 import { TaskComponent } from './components/task/task.component';
 import { ExecutionsComponent } from './components/executions/executions.component';
+import { SecretComponent } from './components/secret/secret.component';
 
 const appRoutes: Routes = [
   {
@@ -19,6 +20,10 @@ const appRoutes: Routes = [
     component: ExecutionsComponent
   },
   {
+    path: 'secrets',
+    component: SecretComponent
+  },
+  {
     path: '',
     component: ServerComponent
   }
@@ -26,4 +31,4 @@ const appRoutes: Routes = [
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 
-export const routedComponents = [ServerComponent, TaskComponent, ExecutionsComponent];
+export const routedComponents = [ServerComponent, TaskComponent, ExecutionsComponent, SecretComponent];

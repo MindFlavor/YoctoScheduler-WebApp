@@ -11,16 +11,18 @@ import { TaskTSQLComponent }                from './components/task/task-tsql.co
 import { TaskPowerShellComponent }          from './components/task/task-powershell.component';
 import { TaskSSISComponent }                from './components/task/task-ssis.component';
 import { ExecutionsDetailComponent }        from './components/executions/executions-detail.component';
+import { SecretDetailComponent }           from './components/secret/secret-detail.component';
 
 import { ServerService, MockServerService } from './services/server.service';
 import { TaskService, MockTaskService  }    from './services/task.service';
+import { SecretService }                    from './services/secret.service';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule, routing ],
-  declarations: [ AppComponent, routedComponents, ServerDetailComponent, TaskDetailComponent, TaskWaitComponent,
-                  TaskTSQLComponent, TaskPowerShellComponent, TaskSSISComponent, 
-                  ExecutionsDetailComponent ],
+  declarations: [ AppComponent, routedComponents, ServerDetailComponent, TaskDetailComponent, 
+                  TaskWaitComponent, TaskTSQLComponent, TaskPowerShellComponent, 
+                  TaskSSISComponent, ExecutionsDetailComponent, SecretDetailComponent ],
   bootstrap:    [ AppComponent ],
-  providers:    [ ServerService, MockServerService, TaskService, MockTaskService ]
+  providers:    [ ServerService, MockServerService, TaskService, MockTaskService, SecretService ]
 })
 export class AppModule { }
