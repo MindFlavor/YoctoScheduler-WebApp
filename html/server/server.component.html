@@ -1,13 +1,11 @@
-<div class="table-responsive">
-    <table class="table">
-        <tr *ngFor="let server of Entities" [class.selected]="server === selectedServer" (click)="onSelect(server)">
-            <td>
-                <img *ngIf="server.Status > 0" src="html/imgs/green_24x24.png" />
-                <img *ngIf="server.Status < 0" src="html/imgs/stop_24x24.png" />
-            </td>
-            <td>{{server.HostName}}</td>        
-        </tr>
-    </table>
-</div>
+<table class="table table-sm">
+    <tr *ngFor="let server of Entities" [class.selected]="server === selectedServer" (click)="onSelect(server)" style="cursor: pointer;">
+        <td>
+            <img *ngIf="server.Status > 0" src="html/imgs/green_24x24.png" />
+            <img *ngIf="server.Status < 0" src="html/imgs/stop_24x24.png" />
+        </td>
+        <td>{{server.HostName}}</td>
+    </tr>
+</table>
 
 <server-detail [server]="selectedServer"></server-detail>

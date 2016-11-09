@@ -1,51 +1,50 @@
-<div class="btn-group">
-	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    New task <span class="caret"></span>
+<div class="dropdown open">
+	<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+		aria-expanded="false">
+    New task
   </button>
-	<ul class="dropdown-menu">
-		<li><a (click)="newTask(taskType.TSQL)">T-SQL</a></li>
-		<li><a (click)="newTask(taskType.SSIS)">SSIS</a></li>
-		<li><a (click)="newTask(taskType.PowerShell)">PowerShell</a></li>
-		<li role="separator" class="divider"></li>
-		<li><a (click)="newTask(taskType.Passthrough)">Passthrough</a></li>
-		<li><a (click)="newTask(taskType.Wait)">Wait task</a></li>
-	</ul>
+	<div class="dropdown-menu" aria-tagledby="dropdownMenuButton">
+		<a class="dropdown-item" (click)="newTask(taskType.TSQL)">T-SQL</a>
+		<a class="dropdown-item" (click)="newTask(taskType.SSIS)">SSIS</a>
+		<a class="dropdown-item" (click)="newTask(taskType.PowerShell)">PowerShell</a>
+		<div class="dropdown-divider"></div>
+		<a class="dropdown-item" (click)="newTask(taskType.Wait)">Wait task</a>
+	</div>
 </div>
 
-<div class="table-responsive">
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Type</th>
-				<th>Name</th>
-				<th>RoKT</th>
-				<th>Concurrency</th>
-				<th>Commands</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr *ngFor="let task of Entities" [class.selected]="task === selectedTask" (click)="onSelect(task)">
-				<td>
-					<img [src]="taskImage(task)" [title]="task.TypeToString()">
-				</td>
-				<td>
-					<span class="label label-default">{{task.Name}}</span>
-				</td>
-				<td>
-					<img *ngIf="task.ReenqueueOnDead" src="html/imgs/redo_16x16.png" title="Auto reenqueue if hosting server dies: enabled">
-					<img *ngIf="!task.ReenqueueOnDead" src="html/imgs/redo_16x16_bw.png" title="auto reenqueue if hosting server dies: disabled">
-				</td>
-				<td><span class="label label-primary">{{concurrencyToString(task)}}</span></td>
-				<td>
-					<!--<div class="btn-group  btn-group-sm">-->
-						<button type="button" class="btn btn-default" title="Send to queue (low priority)" (click)="sendToQueue(task, taskPriority.Low)"><img src="html/imgs/send_to_queue_low_24x24.png" /></button>
-						<button type="button" class="btn btn-default" title="Send to queue (normal priority)" (click)="sendToQueue(task, taskPriority.Normal)"><img src="html/imgs/send_to_queue_24x24.png" /></button>
-						<button type="button" class="btn btn-default" title="Send to queue (high priority)" (click)="sendToQueue(task, taskPriority.High)"><img src="html/imgs/send_to_queue_critical_24x24.png" /></button>
-					<!--</div>-->
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
+<table class="table table-sm">
+	<thead>
+		<tr>
+			<th>Type</th>
+			<th>Name</th>
+			<th>RoKT</th>
+			<th>Concurrency</th>
+			<th>Enqueue</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let task of Entities" [class.selected]="task === selectedTask" (click)="onSelect(task)" style="cursor: pointer;">
+			<td>
+				<img [src]="taskImage(task)" [title]="task.TypeToString()">
+			</td>
+			<td>
+				<span class="tag tag-default">{{task.Name}}</span>
+			</td>
+			<td>
+				<img *ngIf="task.ReenqueueOnDead" src="html/imgs/redo_16x16.png" title="Auto reenqueue if hosting server dies: enabled">
+				<img *ngIf="!task.ReenqueueOnDead" src="html/imgs/redo_16x16_bw.png" title="auto reenqueue if hosting server dies: disabled">
+			</td>
+			<td><span class="tag tag-primary">{{concurrencyToString(task)}}</span></td>
+
+			<td>
+				<div class="btn-group  btn-group-sm" style="display: flex;">
+					<button type="button" class="btn btn-default" title="Send to queue (low priority)" (click)="sendToQueue(task, taskPriority.Low)"><img src="html/imgs/send_to_queue_low_24x24.png" /></button>
+					<button type="button" class="btn btn-default" title="Send to queue (normal priority)" (click)="sendToQueue(task, taskPriority.Normal)"><img src="html/imgs/send_to_queue_24x24.png" /></button>
+					<button type="button" class="btn btn-default" title="Send to queue (high priority)" (click)="sendToQueue(task, taskPriority.High)"><img src="html/imgs/send_to_queue_critical_24x24.png" /></button>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <task-detail [task]="selectedTask"></task-detail>
