@@ -4,7 +4,7 @@
         <h6 class="card-subtitle text-muted"><span [class]="classByStatus(server.Status)">{{server.Status}}</span> {{server.Description}} </h6>
 
         <div class="form-group row">
-            <label class="tag tag-primary">Last ping</label>
+            <label class="col-sm-2 col-form-label">Last ping</label>
             <div class="col-sm-10">
                 <p class="form-control-static mb-0">{{server.LastPing | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
             </div>
