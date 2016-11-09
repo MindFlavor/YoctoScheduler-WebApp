@@ -1,3 +1,5 @@
+<server-detail [server]="selectedServer"></server-detail>
+
 <table class="table table-sm">
     <tr *ngFor="let server of Entities" [class.selected]="server === selectedServer" (click)="onSelect(server)" style="cursor: pointer;">
         <td>
@@ -8,4 +10,3 @@
     </tr>
 </table>
 
-<server-detail [server]="selectedServer"></server-detail>

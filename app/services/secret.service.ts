@@ -3,12 +3,12 @@ import { HttpModule, Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { EntityWithID } from '../entities/entity_with_id';
-import { Secret, EncryptedSecret, PlainTextSecret } from '../entities/secret';
+import { SecretID, Secret, EncryptedSecret, PlainTextSecret } from '../entities/secret';
 import { GenericService } from './generic.service';
 import { GenericHTTPService } from './generic_http.service';
 
 @Injectable()
-export class SecretService extends GenericHTTPService<Secret, string> {
+export class SecretService extends GenericHTTPService<Secret, SecretID> {
     constructor(protected http: Http) { super(http); }
 
     protected getUrl(): string { return ''; }
@@ -93,6 +93,16 @@ export class SecretService extends GenericHTTPService<Secret, string> {
             .put(url, JSON.stringify(t), { headers: headers })
             .toPromise()
             .then(() => t)
+            .catch(this.handleError);
+    }
+
+    public delete(id: SecretID): Promise<boolean> {
+        let url = this.getUrlEncrypted() + `/${id}`;
+
+        return this.http
+            .delete(url)
+            .toPromise()
+            .then(() => { return true })
             .catch(this.handleError);
     }
 

@@ -1,18 +1,28 @@
-<div *ngIf="server">
-    <h2>{{server.HostName}} ({{server.ID}})</h2>
-    <div>
-        <label>Description: </label> {{server.Description}}
-    </div>
+<div *ngIf="server" class="card">
+    <div class="card-block">
+        <h4 class="card-title">{{server.HostName}} ({{server.ID}})</h4>
+        <h6 class="card-subtitle text-muted">{{server.Description}}</h6>
 
-    <div><label>Status</label>
-        <span [class]="classByStatus(server.Status)">{{server.Status}}</span>
-    </div>
 
-    <div>
-        <label>Last ping: </label> {{server.LastPing | date: 'dd/MM/yyyy HH:mm:ss' }}
-    </div>
 
-    <div>
-        <label>IPs:</label> {{server.IPs}}
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Status</label>
+            <div class="col-sm-10">
+                <span [class]="classByStatus(server.Status)">{{server.Status}}</span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Last ping</label>
+            <div class="col-sm-10">
+                <p class="form-control-static mb-0">{{server.LastPing | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">IPs</label>
+            <div class="col-sm-10">
+                <p class="form-control-static mb-0">{{server.IPs}}</p>
+            </div>
+        </div>
     </div>
 </div>

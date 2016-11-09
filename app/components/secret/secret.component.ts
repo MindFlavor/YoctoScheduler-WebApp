@@ -15,9 +15,10 @@ import { GenericComponent } from '../generic.component';
     providers: []
 })
 export class SecretComponent implements OnInit {
-    newSecret: CompleteSecret = undefined;
     secrets: CompleteSecret[];
     selectedSecret: CompleteSecret;
+
+    lastError: string = undefined;
 
     constructor(private secretService: SecretService) { }
 
@@ -36,22 +37,36 @@ export class SecretComponent implements OnInit {
 
     public onSelect(secret: CompleteSecret) {
         this.selectedSecret = secret;
-        if (this.selectedSecret != this.newSecret) {
-            return;
-        }
     }
 
     public createNewSecret() {
-        if (this.newSecret) {
-            this.selectedSecret = this.newSecret;
+        let idxNewSecret = this.secrets.findIndex((s) => s.ID === '');
+        if (idxNewSecret != -1) {
+            this.selectedSecret = this.secrets[idxNewSecret];
             return;
         }
-        this.newSecret = new CompleteSecret('', '', '', '');
+        let newSecret = new CompleteSecret('', '', '', '');
         if (!this.secrets)
             this.secrets = [];
         this.secrets.push(
-            this.newSecret
+            newSecret
         );
-        this.selectedSecret = this.newSecret;
+        this.selectedSecret = newSecret;
+    }
+
+    public deleteSecret(sec: CompleteSecret) {
+        this.lastError = undefined;
+
+        let idxToDelete = this.secrets.findIndex((s) => s.ID === sec.ID);
+        console.log('idxToDelete === ' + idxToDelete);
+
+        this.secrets.splice(idxToDelete, 1);
+        if (sec.ID === '')
+            return;
+
+        // perform the async delete
+        this.secretService.delete(sec.ID).catch((ex) => {
+            this.lastError = `Last delete failed ${ex}.`;
+        })
     }
 }
