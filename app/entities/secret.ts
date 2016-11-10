@@ -1,11 +1,10 @@
-import { EntityWithID } from './entity_with_id';
+import { EntityWithID } from "./entity_with_id";
 
-export type SecretID = string; 
+export type SecretID = string;
 
 export abstract class Secret implements EntityWithID<SecretID> {
     constructor(public ID: SecretID,
-        public CertificateThumbprint: string)
-    { }
+        public CertificateThumbprint: string) { }
 }
 
 export class EncryptedSecret extends Secret {

@@ -1,17 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { GenericHTTPService } from '../../services/generic_http.service';
-import { HttpModule } from '@angular/http';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { GenericHTTPService } from "../../services/generic_http.service";
+import { HttpModule } from "@angular/http";
 
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Observable, Subscription } from "rxjs/Rx";
 
-import { Secret, PlainTextSecret, EncryptedSecret, CompleteSecret } from '../../entities/secret';
-import { SecretService } from '../../services/secret.service';
+import { Secret, PlainTextSecret, EncryptedSecret, CompleteSecret } from "../../entities/secret";
+import { SecretService } from "../../services/secret.service";
 
-import { GenericComponent } from '../generic.component';
+import { GenericComponent } from "../generic.component";
 
 @Component({
-    selector: 'yocto-secrets',
-    templateUrl: '../html/secret/secret.component.html',
+    selector: "yocto-secrets",
+    templateUrl: "../html/secret/secret.component.html",
     providers: []
 })
 export class SecretComponent implements OnInit {
@@ -30,9 +30,9 @@ export class SecretComponent implements OnInit {
         this.secretService.getFromREST()
             .then(r => {
                 this.secrets = [];
-                r.map((s) => this.secrets.push(new CompleteSecret(s.ID, s.CertificateThumbprint, '', s.EncryptedValue)));
+                r.map((s) => this.secrets.push(new CompleteSecret(s.ID, s.CertificateThumbprint, "", s.EncryptedValue)));
             })
-            .catch((e) => console.log('Something went wrong: ' + e + '!'));
+            .catch((e) => console.log("Something went wrong: " + e + "!"));
     }
 
     public onSelect(secret: CompleteSecret) {
@@ -40,12 +40,12 @@ export class SecretComponent implements OnInit {
     }
 
     public createNewSecret() {
-        let idxNewSecret = this.secrets.findIndex((s) => s.ID === '');
-        if (idxNewSecret != -1) {
+        let idxNewSecret = this.secrets.findIndex((s) => s.ID === "");
+        if (idxNewSecret !== -1) {
             this.selectedSecret = this.secrets[idxNewSecret];
             return;
         }
-        let newSecret = new CompleteSecret('', '', '', '');
+        let newSecret = new CompleteSecret("", "", "", "");
         if (!this.secrets)
             this.secrets = [];
         this.secrets.push(
@@ -58,15 +58,15 @@ export class SecretComponent implements OnInit {
         this.lastError = undefined;
 
         let idxToDelete = this.secrets.findIndex((s) => s.ID === sec.ID);
-        console.log('idxToDelete === ' + idxToDelete);
+        console.log("idxToDelete === " + idxToDelete);
 
         this.secrets.splice(idxToDelete, 1);
-        if (sec.ID === '')
+        if (sec.ID === "")
             return;
 
         // perform the async delete
         this.secretService.delete(sec.ID).catch((ex) => {
             this.lastError = `Last delete failed ${ex}.`;
-        })
+        });
     }
 }

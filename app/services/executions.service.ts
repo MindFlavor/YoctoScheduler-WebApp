@@ -1,19 +1,19 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+import { Injectable } from "@angular/core";
+import { Http, Headers } from "@angular/http";
+import "rxjs/add/operator/toPromise";
 
-import { TaskID } from '../entities/task';
-import { TaskStatus } from '../entities/task_status';
-import { Execution } from '../entities/executions';
+import { TaskID } from "../entities/task";
+import { TaskStatus } from "../entities/task_status";
+import { Execution } from "../entities/executions";
 
-import { GenericHTTPService } from './generic_http.service'
-import { GenericService } from './generic.service'
-import { GenericMockService } from './generic_mock.service'
+import { GenericHTTPService } from "./generic_http.service";
+import { GenericService } from "./generic.service";
+import { GenericMockService } from "./generic_mock.service";
 
 @Injectable()
 export class ExecutionService extends GenericHTTPService<Execution, string> {
     protected getUrl(): string {
-        return GenericHTTPService.BASE_URL + '/executions';  // URL to web api
+        return GenericHTTPService.BASE_URL + "/executions";  // URL to web api
     }
 
     public getFromREST(): Promise<Execution[]> {
@@ -39,7 +39,7 @@ export class ExecutionService extends GenericHTTPService<Execution, string> {
     constructor(http: Http) { super(http); }
 }
 
-export class ExecutionService_Mock extends GenericMockService<Execution, string> {
+export class ExecutionServiceMock extends GenericMockService<Execution, string> {
     initializeData(): Execution[] {
         return [
             new Execution("a", TaskStatus.Completed, new Date("20110101"),

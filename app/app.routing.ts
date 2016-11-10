@@ -1,30 +1,30 @@
-import { ModuleWithProviders } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { ModuleWithProviders } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 
-import { ServerComponent } from './components/server/server.component';
-import { TaskComponent } from './components/task/task.component';
-import { ExecutionsComponent } from './components/executions/executions.component';
-import { SecretComponent } from './components/secret/secret.component';
+import { ServerComponent } from "./components/server/server.component";
+import { TaskComponent } from "./components/task/task.component";
+import { ExecutionsComponent } from "./components/executions/executions.component";
+import { SecretComponent } from "./components/secret/secret.component";
 
 const appRoutes: Routes = [
   {
-    path: 'servers',
+    path: "servers",
     component: ServerComponent
   },
   {
-    path: 'tasks',
+    path: "tasks",
     component: TaskComponent
   },
   {
-    path: 'executions',
+    path: "executions",
     component: ExecutionsComponent
   },
   {
-    path: 'secrets',
+    path: "secrets",
     component: SecretComponent
   },
   {
-    path: '',
+    path: "",
     component: ServerComponent
   }
 ];

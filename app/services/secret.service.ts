@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
-import { HttpModule, Headers, Http } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+import { Injectable } from "@angular/core";
+import { HttpModule, Headers, Http } from "@angular/http";
+import "rxjs/add/operator/toPromise";
 
-import { EntityWithID } from '../entities/entity_with_id';
-import { SecretID, Secret, EncryptedSecret, PlainTextSecret } from '../entities/secret';
-import { GenericService } from './generic.service';
-import { GenericHTTPService } from './generic_http.service';
+import { EntityWithID } from "../entities/entity_with_id";
+import { SecretID, Secret, EncryptedSecret, PlainTextSecret } from "../entities/secret";
+import { GenericService } from "./generic.service";
+import { GenericHTTPService } from "./generic_http.service";
 
 @Injectable()
 export class SecretService extends GenericHTTPService<Secret, SecretID> {
     constructor(protected http: Http) { super(http); }
 
-    protected getUrl(): string { return ''; }
+    protected getUrl(): string { return ""; }
 
     protected getUrlPlainText(): string {
         return GenericHTTPService.BASE_URL + "/plaintextsecretitems";
@@ -38,16 +38,16 @@ export class SecretService extends GenericHTTPService<Secret, SecretID> {
                 ));
                 return this.encSecrets;
             })
-            .catch(this.handleError)
+            .catch(this.handleError);
     }
 
     getAll(): Promise<EncryptedSecret[]> {
         if (this.encSecrets) {
-            console.log(this + '.getAll() from cache');
-            return new Promise((res, rej) => { res(this.encSecrets); })
+            console.log(this + ".getAll() from cache");
+            return new Promise((res, rej) => { res(this.encSecrets); });
         }
         else {
-            console.log(this + '.getAll() performing REST call');
+            console.log(this + ".getAll() performing REST call");
             return this.getFromREST();
         }
     }
@@ -56,7 +56,7 @@ export class SecretService extends GenericHTTPService<Secret, SecretID> {
         if (this.encSecrets) {
             let v = this.encSecrets.find(t => t.ID === id);
             return new Promise((res, rej) => {
-                console.log('calling res with: ' + v);
+                console.log("calling res with: " + v);
                 res(v);
             });
         }
@@ -68,24 +68,24 @@ export class SecretService extends GenericHTTPService<Secret, SecretID> {
     }
 
     public post(t: PlainTextSecret): Promise<PlainTextSecret> {
-        console.log('post');
+        console.log("post");
         let headers = new Headers({
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         });
 
         return this.http
             .post(this.getUrlPlainText(), JSON.stringify(t), { headers: headers })
             .toPromise()
             .then(res => {
-                console.log('wow!');
-                return res.json().data
+                console.log("wow!");
+                return res.json().data;
             })
             .catch(this.handleError);
     }
 
     public put(t: PlainTextSecret): Promise<PlainTextSecret> {
         let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        headers.append("Content-Type", "application/json");
 
         let url = this.getUrlPlainText() + `/${t.ID}`;
 
@@ -102,7 +102,7 @@ export class SecretService extends GenericHTTPService<Secret, SecretID> {
         return this.http
             .delete(url)
             .toPromise()
-            .then(() => { return true })
+            .then(() => { return true; })
             .catch(this.handleError);
     }
 
@@ -118,7 +118,7 @@ export class SecretService extends GenericHTTPService<Secret, SecretID> {
     }
 
     protected handleError(error: any) {
-        console.error('GenericHTTPService::' + this + ' - An error occurred', error);
+        console.error("GenericHTTPService::" + this + " - An error occurred", error);
         return Promise.reject(error.message || error);
     }
 }

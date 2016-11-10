@@ -1,9 +1,9 @@
-import { EntityWithID } from './entity_with_id';
-import { TaskID } from './task';
-import { ScheduleID } from './schedule';
-import { TaskStatus } from './task_status';
-import { TaskPriority } from './task_priority'
-import { ServerID } from './server';
+import { EntityWithID } from "./entity_with_id";
+import { TaskID } from "./task";
+import { ScheduleID } from "./schedule";
+import { TaskStatus } from "./task_status";
+import { TaskPriority } from "./task_priority";
+import { ServerID } from "./server";
 
 export type ItemWithTaskStatusPartitionedByStatus<T> = { [status: number]: ItemWithTaskStatus<T>[] };
 
@@ -12,7 +12,7 @@ export abstract class ItemWithTaskStatus<T> implements EntityWithID<T> {
     constructor(public Status: TaskStatus) { }
 
     public static partitionByStatus<T>(iws: ItemWithTaskStatus<T>[]): ItemWithTaskStatusPartitionedByStatus<T> {
-        var map: ItemWithTaskStatusPartitionedByStatus<T> = {};
+        let map: ItemWithTaskStatusPartitionedByStatus<T> = {};
 
         for (status in TaskStatus) {
             let statusNum = parseInt(status);
@@ -35,7 +35,7 @@ export class Execution extends ItemWithTaskStatus<string> {
         public ServerID: ServerID,
         public Priority: TaskPriority | undefined,
         public TaskID: TaskID) {
-        super(Status)
+        super(Status);
         this.ID = ID;
     }
 

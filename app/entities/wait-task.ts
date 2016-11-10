@@ -1,4 +1,4 @@
-import { Task, TaskFromWS, TaskType } from './task';
+import { Task, TaskFromWS, TaskType } from "./task";
 
 export class WaitTask extends Task {
     SleepSeconds: number;
@@ -16,7 +16,7 @@ export class WaitTask extends Task {
 
     public static fromTaskFromWS(t: TaskFromWS): WaitTask {
         if (!(t.Type === "WaitTask"))
-            throw "Unsupported conversion"
+            throw "Unsupported conversion";
 
         let wt: WaitTask = new WaitTask();
         wt.cloneData(t);
@@ -31,7 +31,7 @@ export class WaitTask extends Task {
         wt.SleepSeconds = this.SleepSeconds;
 
         this.Payload = JSON.stringify(wt);
-        console.log('this == ' + JSON.stringify(this));
+        console.log("this == " + JSON.stringify(this));
     }
 
     public paramsFromPayload(): void {
