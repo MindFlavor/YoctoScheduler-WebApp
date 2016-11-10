@@ -1,31 +1,32 @@
 <div *ngIf="executions">
     <ul class="list-group">
         <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.Idle)" (click)="selectTaskStatus(TaskStatus.Idle)"
-            *ngIf="executions[TaskStatus.Idle].length > 0">
-            In queue <span class="badge">{{executions[TaskStatus.Idle].length}}</span>
+            *ngIf="executions[TaskStatus.Idle].length > 0" style="cursor: pointer;">
+            In queue <span class="tag tag-pill tag-default float-xs-right">{{executions[TaskStatus.Idle].length}}</span>
         </li>
         <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.Running)" (click)="selectTaskStatus(TaskStatus.Running)"
-            *ngIf="executions[TaskStatus.Running].length > 0">
-            Running <span class="badge">{{executions[TaskStatus.Running].length}}</span>
+            *ngIf="executions[TaskStatus.Running].length > 0" style="cursor: pointer;">
+            Running <span class="tag tag-pill tag-primary float-xs-right">{{executions[TaskStatus.Running].length}}</span>
         </li>
-        <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.Completed)" (click)="selectTaskStatus(TaskStatus.Completed)">
-            Completed <span class="badge">{{executions[TaskStatus.Completed].length}}</span>
+        <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.Completed)" (click)="selectTaskStatus(TaskStatus.Completed)"
+            style="cursor: pointer;">
+            Completed <span class="tag tag-pill tag-default float-xs-right">{{executions[TaskStatus.Completed].length}}</span>
         </li>
         <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.Aborted)" (click)="selectTaskStatus(TaskStatus.Aborted)"
-            *ngIf="executions[TaskStatus.Aborted].length > 0">
-            Aborted <span class="badge">{{executions[TaskStatus.Aborted].length}}</span>
+            *ngIf="executions[TaskStatus.Aborted].length > 0" style="cursor: pointer;">
+            Aborted <span class="tag tag-pill tag-warning float-xs-right">{{executions[TaskStatus.Aborted].length}}</span>
         </li>
         <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.Dead)" (click)="selectTaskStatus(TaskStatus.Dead)"
-            *ngIf="executions[TaskStatus.Dead].length > 0">
-            Dead <span class="badge">{{executions[TaskStatus.Dead].length}}</span>
+            *ngIf="executions[TaskStatus.Dead].length > 0" style="cursor: pointer;">
+            Dead <span class="tag tag-pill tag-warning float-xs-right">{{executions[TaskStatus.Dead].length}}</span>
         </li>
         <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.ExceptionAtStartup)" (click)="selectTaskStatus(TaskStatus.ExceptionAtStartup)"
-            *ngIf="executions[TaskStatus.ExceptionAtStartup].length > 0">
-            Exception (startup) <span class="badge">{{executions[TaskStatus.ExceptionAtStartup].length}}</span>
+            *ngIf="executions[TaskStatus.ExceptionAtStartup].length > 0" style="cursor: pointer;">
+            Exception (startup) <span class="tag tag-pill tag-danger float-xs-right">{{executions[TaskStatus.ExceptionAtStartup].length}}</span>
         </li>
         <li class="list-group-item" [class.active]="isTaskStatusSelected(TaskStatus.ExceptionDuringExecution)" (click)="selectTaskStatus(TaskStatus.ExceptionDuringExecution)"
-            *ngIf="executions[TaskStatus.ExceptionDuringExecution].length > 0">
-            Exception (execution) <span class="badge">{{executions[TaskStatus.ExceptionDuringExecution].length}}</span>
+            *ngIf="executions[TaskStatus.ExceptionDuringExecution].length > 0" style="cursor: pointer;">
+            Exception (execution) <span class="tag tag-pill tag-danger float-xs-right">{{executions[TaskStatus.ExceptionDuringExecution].length}}</span>
         </li>
     </ul>
     <executions-detail [executions]="selectedExecutions">

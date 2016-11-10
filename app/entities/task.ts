@@ -1,4 +1,4 @@
-import { EntityWithID } from './entity_with_id';
+import { EntityWithID } from "./entity_with_id";
 
 export type TaskID = number;
 
@@ -41,7 +41,7 @@ export class Task {
         this.ReenqueueOnDead = false;
     }
 
-    public toString = () : string => {
+    public toString(): string {
 
         return `Task (ID: ${this.ID}, Name: ${this.Name})`;
     }
@@ -106,6 +106,17 @@ export class Task {
     }
 
     public paramsFromPayload(): void {
+    }
+
+    public taskImage(): string {
+        switch (this.Type) {
+            case TaskType.Wait: return "html/imgs/wait_16x16.png";
+            case TaskType.Passthrough: return "html/imgs/passthrough_16x16.png";
+            case TaskType.SSIS: return "html/imgs/ssis_16x16.png";
+            case TaskType.PowerShell: return "html/imgs/powershell_16x16.png";
+            case TaskType.TSQL: return "html/imgs/tsql_16x16.png";
+            default: return "html/imgs/unknown_16x16.png";
+        }
     }
 }
 

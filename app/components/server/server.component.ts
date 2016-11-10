@@ -1,17 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { GenericHTTPService } from '../../services/generic_http.service';
-import { HttpModule } from '@angular/http';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { GenericHTTPService } from "../../services/generic_http.service";
+import { HttpModule } from "@angular/http";
 
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Observable, Subscription } from "rxjs/Rx";
 
-import { Server } from '../../entities/server';
-import { ServerService, MockServerService } from '../../services/server.service';
+import { Server } from "../../entities/server";
+import { ServerService, MockServerService } from "../../services/server.service";
 
-import { GenericComponent } from '../generic.component';
+import { GenericComponent } from "../generic.component";
 
 @Component({
-    selector: 'yocto-servers',
-    templateUrl: '../html/server/server.component.html',
+    selector: "yocto-servers",
+    templateUrl: "../html/server/server.component.html",
     providers: []
 })
 export class ServerComponent extends GenericComponent<Server, number> {

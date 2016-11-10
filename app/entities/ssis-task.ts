@@ -1,4 +1,4 @@
-import { Task, TaskFromWS, TaskType } from './task';
+import { Task, TaskFromWS, TaskType } from "./task";
 
 export class SSISTask extends Task {
     Use32Bit: boolean;
@@ -19,7 +19,7 @@ export class SSISTask extends Task {
 
     public static fromTaskFromWS(t: TaskFromWS): SSISTask {
         if (!(t.Type === "SSISTask"))
-            throw "Unsupported conversion"
+            throw "Unsupported conversion";
 
         let wt: SSISTask = new SSISTask();
         wt.cloneData(t);
@@ -37,7 +37,7 @@ export class SSISTask extends Task {
         wt.Timeout = this.Timeout;
 
         this.Payload = JSON.stringify(wt);
-        console.log('this == ' + JSON.stringify(this));
+        console.log("this == " + JSON.stringify(this));
     }
 
     public paramsFromPayload(): void {
