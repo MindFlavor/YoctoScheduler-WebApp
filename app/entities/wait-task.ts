@@ -10,6 +10,10 @@ export class WaitTask extends Task {
         this.SleepSeconds = 60;
     }
 
+    public toString(): string {
+        return `${super.toString()} WaitTask (SleepSeconds: ${this.SleepSeconds})`;
+    }
+
     public static fromTaskFromWS(t: TaskFromWS): WaitTask {
         if (!(t.Type === "WaitTask"))
             throw "Unsupported conversion"

@@ -1,0 +1,17 @@
+<div *ngIf="task">
+	<h6 class="card-subtitle text-muted"><img [src]="task.taskImage()" [title]="task.TypeToString()"> {{task.Description}}
+	</h6>
+
+	<div *ngIf="task.Type === taskType.Wait">
+		<ro-task-wait [task]="task"></ro-task-wait>
+	</div>
+	<div *ngIf="task.Type === taskType.TSQL">
+		<ro-task-tsql [task]="task"></ro-task-tsql>
+	</div>
+	<div *ngIf="task.Type === taskType.PowerShell">
+		<ro-task-powershell [task]="task"></ro-task-powershell>
+	</div>
+	<div *ngIf="task.Type === taskType.SSIS">
+		<ro-task-ssis [task]="task"></ro-task-ssis>
+	</div>
+</div>

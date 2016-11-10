@@ -15,9 +15,14 @@
         </thead>
         <tbody>
             <tr *ngFor="let exec of executions">
-                <td title="TaskID: {{exec.TaskID}}">
+                <td title="TaskID: {{exec.TaskID}}" [popover]="myPopover">
                     <span class="tag tag-primary">{{taskByID(exec.TaskID).Name}}</span>
+
+                    <popover-content #myPopover title="{{taskByID(exec.TaskID).Name}}" placement="right" [animation]="true" [closeOnClickOutside]="true">
+                        <ro-task-detail [task]="taskByID(exec.TaskID)"></ro-task-detail>
+                    </popover-content>
                 </td>
+
                 <td *ngIf="executions[0].Status > 200">{{exec.Elapsed/1000}} s</td>
                 <td *ngIf="executions[0].Status > 200" title="ServerID: {{exec.ServerID}}">
                     <span class="tag tag-default">{{serverByID(exec.ServerID).HostName}}</span>

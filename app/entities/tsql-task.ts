@@ -12,6 +12,10 @@ export class TSQLTask extends Task {
         this.CommandTimeout = 0;
     }
 
+    public toString(): string {
+        return `${super.toString()} WaitTask (ConnectionString: ${this.ConnectionString}, Statement: ${this.Statement}, CommandTimeout: ${this.CommandTimeout})`;
+    }
+
     public static fromTaskFromWS(t: TaskFromWS): TSQLTask {
         if (!(t.Type === "TSQLTask"))
             throw "Unsupported conversion"

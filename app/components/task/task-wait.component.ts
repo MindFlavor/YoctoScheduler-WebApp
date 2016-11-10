@@ -9,4 +9,6 @@ import { WaitTask } from '../../entities/wait-task';
 export class TaskWaitComponent {
     @Input()
     task: WaitTask;
+
+    
 }

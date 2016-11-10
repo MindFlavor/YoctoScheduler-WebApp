@@ -61,17 +61,6 @@ export class TaskComponent extends GenericComponent<Task, number> {
         this.onSelect(t);
     }
 
-    public taskImage(task: Task): string {
-        switch (task.Type) {
-            case TaskType.Wait: return "html/imgs/wait_16x16.png";
-            case TaskType.Passthrough: return "html/imgs/passthrough_16x16.png";
-            case TaskType.SSIS: return "html/imgs/ssis_16x16.png";
-            case TaskType.PowerShell: return "html/imgs/powershell_16x16.png";
-            case TaskType.TSQL: return "html/imgs/tsql_16x16.png";
-            default: return "html/imgs/unknown_16x16.png";
-        }
-    }
-
     public concurrencyToString(t: Task): string {
         let sLocal = t.ConcurrencyLimitSameInstance == 0 ? "∞" : t.ConcurrencyLimitSameInstance;
         let sGlobal = t.ConcurrencyLimitGlobal == 0 ? "∞" : t.ConcurrencyLimitGlobal;

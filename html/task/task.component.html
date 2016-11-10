@@ -25,7 +25,7 @@
 	<tbody>
 		<tr *ngFor="let task of Entities" [class.selected]="task === selectedTask" (click)="onSelect(task)" style="cursor: pointer;">
 			<td>
-				<img [src]="taskImage(task)" [title]="task.TypeToString()">
+				<img [src]="task.taskImage()" [title]="task.TypeToString()">
 			</td>
 			<td>
 				<span class="tag tag-default">{{task.Name}}</span>
