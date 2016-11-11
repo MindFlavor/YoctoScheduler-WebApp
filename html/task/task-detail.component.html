@@ -1,13 +1,13 @@
 <div *ngIf="task">
-	<div class="panel panel-default">
-		<div class="panel-heading">Standard options</div>
-		<div class="panel-body">
+	<div class="card">
+		<div class="card-block">
+			<h4 class="card-title">Standard options</h4>
 			<div class="form-group">
-				<label for="name">Name: </label>
+				<label for="name">Name</label>
 				<input type="text" class="form-control" [(ngModel)]="task.Name" placeholder="Task name">
 			</div>
 			<div class="form-group">
-				<label for="desc">Description: </label>
+				<label for="desc">Description</label>
 				<textarea class="form-control" rows="2" [(ngModel)]="task.Description"></textarea>
 			</div>
 
@@ -33,9 +33,9 @@
 		</div>
 	</div>
 
-	<div class="panel panel-default">
-		<div class="panel-heading">{{task.TypeToString()}} task options</div>
-		<div class="panel-body">
+	<div class="card">
+		<div class="card-block">
+			<h4 class="card-title">{{task.TypeToString()}} task options</h4>
 			<div *ngIf="task.Type === taskType.Wait">
 				<task-wait [task]="task"></task-wait>
 			</div>
@@ -52,8 +52,8 @@
 	</div>
 
 	<div *ngIf="lastError" class="alert alert-danger">
-  		<strong>Failure:</strong> {{lastError}}
-	</div> 
+		<strong>Failure:</strong> {{lastError}}
+	</div>
 
 	<button type="button" class="btn btn-primary" (click)="persistTask()" [disabled]="!buttonEnabled">Persist changes</button>
 	<img src="html/imgs/wait_24x24.gif" *ngIf="!buttonEnabled">

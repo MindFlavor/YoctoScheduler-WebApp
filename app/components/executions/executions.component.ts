@@ -1,22 +1,22 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { GenericHTTPService } from '../../services/generic_http.service';
-import { HttpModule } from '@angular/http';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { GenericHTTPService } from "../../services/generic_http.service";
+import { HttpModule } from "@angular/http";
 
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Observable, Subscription } from "rxjs/Rx";
 
-import { QueueItem } from '../../entities/queue_item';
-import { ItemWithTaskStatus, Execution, ItemWithTaskStatusPartitionedByStatus } from '../../entities/executions';
-import { ExecutionService, ExecutionService_Mock } from '../../services/executions.service';
-import { ServerService, MockServerService } from '../../services/server.service';
+import { QueueItem } from "../../entities/queue_item";
+import { ItemWithTaskStatus, Execution, ItemWithTaskStatusPartitionedByStatus } from "../../entities/executions";
+import { ExecutionService, ExecutionServiceMock } from "../../services/executions.service";
+import { ServerService, MockServerService } from "../../services/server.service";
 
-import { TaskStatus } from '../../entities/task_status';
+import { TaskStatus } from "../../entities/task_status";
 
-import { GenericComponent } from '../generic.component';
+import { GenericComponent } from "../generic.component";
 
 @Component({
-    selector: 'yocto-executions',
-    templateUrl: '../html/executions/executions.component.html',
-    providers: [ExecutionService, ExecutionService_Mock]
+    selector: "yocto-executions",
+    templateUrl: "../html/executions/executions.component.html",
+    providers: [ExecutionService, ExecutionServiceMock]
 })
 export class ExecutionsComponent implements OnInit, OnDestroy {
     protected TaskStatus = TaskStatus;
@@ -33,7 +33,7 @@ export class ExecutionsComponent implements OnInit, OnDestroy {
     constructor(private executionService: ExecutionService, private serverService: ServerService) {
         this.pollingInterval = 5000;
 
-        console.log('creating ExecutionsComponent with service: ' + this.executionService + ', serverService: ' + this.serverService + ', pollingInterval: ' + this.pollingInterval);
+        console.log("creating ExecutionsComponent with service: " + this.executionService + ", serverService: " + this.serverService + ", pollingInterval: " + this.pollingInterval);
 
         if (this.pollingInterval > 0) {
             this.polling = Observable.interval(this.pollingInterval)
@@ -69,7 +69,7 @@ export class ExecutionsComponent implements OnInit, OnDestroy {
                     this.selectedExecutions = this.executions[this.selectedTaskStatus] as Execution[];
 
             })
-            .catch((e) => console.log('Something went wrong: ' + e + '!'));
+            .catch((e) => console.log("Something went wrong: " + e + "!"));
     }
 
     public selectTaskStatus(ts: TaskStatus) {

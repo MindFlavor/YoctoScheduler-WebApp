@@ -1,9 +1,9 @@
-import { Component, Input } from '@angular/core';
-import { Server } from '../../entities/server';
+import { Component, Input } from "@angular/core";
+import { Server } from "../../entities/server";
 
 @Component({
-    selector: 'server-detail',
-    templateUrl: '../html/server/server-detail.component.html',
+    selector: "server-detail",
+    templateUrl: "../html/server/server-detail.component.html",
 })
 export class ServerDetailComponent {
     @Input()
@@ -11,8 +11,8 @@ export class ServerDetailComponent {
 
     public classByStatus(status: number): string {
         if (status > 0)
-            return "label label-success"
+            return "tag tag-success";
         else if (status < 0)
-            return "label label-danger";
+            return "tag tag-danger";
     }
 }

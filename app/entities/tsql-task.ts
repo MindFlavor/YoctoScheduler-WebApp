@@ -1,4 +1,4 @@
-import { Task, TaskFromWS, TaskType } from './task';
+import { Task, TaskFromWS, TaskType } from "./task";
 
 export class TSQLTask extends Task {
     ConnectionString: string;
@@ -12,9 +12,13 @@ export class TSQLTask extends Task {
         this.CommandTimeout = 0;
     }
 
+    public toString(): string {
+        return `${super.toString()} WaitTask (ConnectionString: ${this.ConnectionString}, Statement: ${this.Statement}, CommandTimeout: ${this.CommandTimeout})`;
+    }
+
     public static fromTaskFromWS(t: TaskFromWS): TSQLTask {
         if (!(t.Type === "TSQLTask"))
-            throw "Unsupported conversion"
+            throw "Unsupported conversion";
 
         let wt: TSQLTask = new TSQLTask();
         wt.cloneData(t);
@@ -31,7 +35,7 @@ export class TSQLTask extends Task {
         wt.CommandTimeout = this.CommandTimeout;
 
         this.Payload = JSON.stringify(wt);
-        console.log('this == ' + JSON.stringify(this));
+        console.log("this == " + JSON.stringify(this));
     }
 
     public paramsFromPayload(): void {

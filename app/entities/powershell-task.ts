@@ -1,4 +1,4 @@
-import { Task, TaskFromWS, TaskType } from './task';
+import { Task, TaskFromWS, TaskType } from "./task";
 
 export class PowerShellTask extends Task {
     Script: string;
@@ -11,7 +11,7 @@ export class PowerShellTask extends Task {
 
     public static fromTaskFromWS(t: TaskFromWS): PowerShellTask {
         if (!(t.Type === "PowerShellTask"))
-            throw "Unsupported conversion"
+            throw "Unsupported conversion";
 
         let wt: PowerShellTask = new PowerShellTask();
         wt.cloneData(t);
@@ -26,7 +26,7 @@ export class PowerShellTask extends Task {
         wt.Script = this.Script;
 
         this.Payload = JSON.stringify(wt);
-        console.log('this == ' + JSON.stringify(this));
+        console.log("this == " + JSON.stringify(this));
     }
 
     public paramsFromPayload(): void {

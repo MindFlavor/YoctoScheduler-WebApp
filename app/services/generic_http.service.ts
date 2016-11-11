@@ -1,12 +1,17 @@
-import { Injectable } from '@angular/core';
-import { HttpModule, Headers, Http } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+import { Injectable } from "@angular/core";
+import { HttpModule, Headers, Http } from "@angular/http";
+import "rxjs/add/operator/toPromise";
 
-import { EntityWithID } from '../entities/entity_with_id';
-import { GenericService } from './generic.service';
+import { EntityWithID } from "../entities/entity_with_id";
+import { GenericService } from "./generic.service";
 
 @Injectable()
 export abstract class GenericHTTPService<T extends EntityWithID<K>, K> implements GenericService<T, K>  {
+
+    // public static BASE_URL = "http://localhost:9000/api";
+    // public static BASE_URL = "http://frcognozbook:9000/api";
+    public static BASE_URL = "http://cantun.mindflavor.it:9000/api";
+
     protected abstract getUrl(): string;
 
     constructor(protected http: Http) { }
@@ -23,26 +28,26 @@ export abstract class GenericHTTPService<T extends EntityWithID<K>, K> implement
                 objs.map(obj => this.tArray.push(obj as T));
                 return this.tArray;
             })
-            .catch(this.handleError)
+            .catch(this.handleError);
     }
 
     getAll(): Promise<T[]> {
         if (this.tArray) {
-            console.log(this + '.getAll() from cache');
-            return new Promise((res, rej) => { res(this.tArray); })
+            console.log(this + ".getAll() from cache");
+            return new Promise((res, rej) => { res(this.tArray); });
         }
         else {
-            console.log(this + '.getAll() performing REST call');
-           return this.getFromREST();
+            console.log(this + ".getAll() performing REST call");
+            return this.getFromREST();
         }
     }
 
     get(id: K): Promise<T> {
         if (this.tArray) {
             let v = this.tArray.find(t => t.ID === id);
-            return new Promise((res, rej) => { 
-                console.log('calling res with: ' + v);
-                res(v); 
+            return new Promise((res, rej) => {
+                console.log("calling res with: " + v);
+                res(v);
             });
         }
 
@@ -54,7 +59,7 @@ export abstract class GenericHTTPService<T extends EntityWithID<K>, K> implement
 
     protected post(t: T): Promise<T> {
         let headers = new Headers({
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         });
 
         return this.http
@@ -66,7 +71,7 @@ export abstract class GenericHTTPService<T extends EntityWithID<K>, K> implement
 
     protected put(t: T): Promise<T> {
         let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        headers.append("Content-Type", "application/json");
 
         let url = this.getUrl() + `/${t.ID}`;
 
@@ -78,7 +83,7 @@ export abstract class GenericHTTPService<T extends EntityWithID<K>, K> implement
     }
 
     protected handleError(error: any) {
-        console.error('GenericHTTPService::' + this + ' - An error occurred', error);
+        console.error("GenericHTTPService::" + this + " - An error occurred", error);
         return Promise.reject(error.message || error);
     }
 
