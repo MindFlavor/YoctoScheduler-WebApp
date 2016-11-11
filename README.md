@@ -13,4 +13,4 @@ This projects contains the Angular 2 WebApp for the YoctoScheduler project. In o
 As soon as the project reaches a working version I will submodule it to the main [YoctoScheduler-core](https://github.com/MindFlavor/YoctoScheduler-core) project so you don't have to do this manually.
 
 ## LICENSE
-See [LICENSE](https://github.com/MindFlavor/YoctoScheduler-core) for more details.
+See [LICENSE](LICENSE) for more details.
