@@ -5,8 +5,7 @@ import { HttpModule }                       from "@angular/http";
 import { AppComponent }                     from "./app.component";
 import { routing, routedComponents }        from "./app.routing";
 
-import {PopoverModule}                      from "ng2-popover";
-
+import { PopoverModule }                    from "ng2-popover";
 
 import { ServerDetailComponent }            from "./components/server/server-detail.component";
 import { TaskDetailComponent }              from "./components/task/task-detail.component";
@@ -27,13 +26,23 @@ import { TaskService, MockTaskService  }    from "./services/task.service";
 import { SecretService }                    from "./services/secret.service";
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule, HttpModule, routing, PopoverModule ],
-  declarations: [ AppComponent, routedComponents, ServerDetailComponent, TaskDetailComponent,
-                  TaskWaitComponent, TaskTSQLComponent, TaskPowerShellComponent,
-                  TaskSSISComponent, ExecutionsDetailComponent, SecretDetailComponent,
-                  ROTaskDetailComponent, ROTaskWaitComponent, ROTaskTSQLComponent,
-                  ROTaskPowerShellComponent, ROTaskSSISComponent ],
-  bootstrap:    [ AppComponent ],
-  providers:    [ ServerService, MockServerService, TaskService, MockTaskService, SecretService ]
+  imports:      [
+                  BrowserModule,            FormsModule,                    HttpModule,
+                  routing,                  PopoverModule
+                ],
+  declarations: [
+                  AppComponent,             routedComponents,               ServerDetailComponent,
+                  TaskDetailComponent,      TaskWaitComponent,              TaskTSQLComponent,
+                  TaskPowerShellComponent,  TaskSSISComponent,              ExecutionsDetailComponent,
+                  SecretDetailComponent,    ROTaskDetailComponent,          ROTaskWaitComponent,
+                  ROTaskTSQLComponent,      ROTaskPowerShellComponent,      ROTaskSSISComponent
+                ],
+  bootstrap:    [
+                  AppComponent
+                ],
+  providers:    [
+                  ServerService,            MockServerService,              TaskService,
+                  MockTaskService,          SecretService
+                ]
 })
 export class AppModule { }
