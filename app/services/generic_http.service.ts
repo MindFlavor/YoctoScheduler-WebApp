@@ -82,6 +82,24 @@ export abstract class GenericHTTPService<T extends EntityWithID<K>, K> implement
             .catch(this.handleError);
     }
 
+    public delete(t: T): Promise<void> {
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+
+        let url = this.getUrl() + `/${t.ID}`;
+
+        return this.http
+            .delete(url, { headers: headers })
+            .toPromise()
+            .then(() => {
+                const iPos = this.tArray.indexOf(t);
+                if (iPos && (iPos !== -1)) {
+                    this.tArray = this.tArray.splice(iPos, 1);
+                }
+            })
+            .catch(this.handleError);
+    }
+
     protected handleError(error: any) {
         console.error("GenericHTTPService::" + this + " - An error occurred", error);
         return Promise.reject(error.message || error);

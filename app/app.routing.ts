@@ -5,6 +5,7 @@ import { ServerComponent } from "./components/server/server.component";
 import { TaskComponent } from "./components/task/task.component";
 import { ExecutionsComponent } from "./components/executions/executions.component";
 import { SecretComponent } from "./components/secret/secret.component";
+import { SchedulesComponent } from "./components/schedules/schedules.component";
 
 const appRoutes: Routes = [
   {
@@ -24,6 +25,10 @@ const appRoutes: Routes = [
     component: SecretComponent
   },
   {
+    path: "schedules",
+    component: SchedulesComponent
+  },
+  {
     path: "",
     component: ServerComponent
   }
@@ -31,4 +36,4 @@ const appRoutes: Routes = [
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 
-export const routedComponents = [ServerComponent, TaskComponent, ExecutionsComponent, SecretComponent];
+export const routedComponents = [ServerComponent, TaskComponent, ExecutionsComponent, SecretComponent, SchedulesComponent];

@@ -65,7 +65,7 @@ export class SecretComponent implements OnInit {
             return;
 
         // perform the async delete
-        this.secretService.delete(sec.ID).catch((ex) => {
+        this.secretService.delete(sec).catch((ex) => {
             this.lastError = `Last delete failed ${ex}.`;
         });
     }

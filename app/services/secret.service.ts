@@ -96,16 +96,6 @@ export class SecretService extends GenericHTTPService<Secret, SecretID> {
             .catch(this.handleError);
     }
 
-    public delete(id: SecretID): Promise<boolean> {
-        let url = this.getUrlEncrypted() + `/${id}`;
-
-        return this.http
-            .delete(url)
-            .toPromise()
-            .then(() => { return true; })
-            .catch(this.handleError);
-    }
-
     save(t: PlainTextSecret): Promise<PlainTextSecret> {
         if (t.ID) {
             return this.put(t);

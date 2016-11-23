@@ -1,0 +1,29 @@
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>
+                Task
+            </th>
+            <th>
+                Cron
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let schedule of Entities | paginate: { itemsPerPage: 10, currentPage: p }">
+            <td [popover]="myPopover">
+                <span class="tag tag-primary">{{taskByID(schedule.TaskID).Name}}</span>
+                <popover-content #myPopover title="{{taskByID(schedule.TaskID).Name}}" placement="right" [animation]="true" [closeOnClickOutside]="true">
+                    <ro-task-detail [task]="taskByID(schedule.TaskID)"></ro-task-detail>
+                </popover-content>
+            </td>
+            <td>{{schedule.Cron}}</td>
+            <td>
+                <div class="btn-group btn-group-sm" style="display: flex;">
+					<button type="button" class="btn btn-default" title="Delete" (click)="deleteSchedule(schedule)"><img src="html/imgs/trash_24x24.png" /></button>
+				</div>
+                </td>            
+        </tr>
+    </tbody>
+</table>
+<pagination-controls (pageChange)="p = $event" #api></pagination-controls>

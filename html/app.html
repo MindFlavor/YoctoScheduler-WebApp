@@ -1,7 +1,7 @@
 <div class="container">
 	<nav class="navbar navbar-light bg-faded">
 		<button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbar-header"
-						aria-expanded="false" aria-label="Toggle navigation"></button>
+			aria-expanded="false" aria-label="Toggle navigation"></button>
 		<div class="collapse navbar-toggleable-xs" id="navbar-header">
 			<a class="navbar-brand" routerLink="/executions"><img src="html/imgs/yocto_20x20.png" /></a>
 			<ul class="nav navbar-nav">
@@ -13,6 +13,9 @@
 				</li>
 				<li class="nav-item" [routerLinkActive]="['active']">
 					<a routerLink="/executions" class="nav-link">Executions</a>
+				</li>
+				<li class="nav-item" [routerLinkActive]="['active']">
+					<a routerLink="/schedules" class="nav-link">Schedules</a>
 				</li>
 				<li class="nav-item" [routerLinkActive]="['active']">
 					<a routerLink="/secrets" class="nav-link">Secrets</a>

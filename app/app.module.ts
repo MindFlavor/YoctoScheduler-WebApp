@@ -24,6 +24,7 @@ import { SecretDetailComponent }            from "./components/secret/secret-det
 import { ServerService, MockServerService } from "./services/server.service";
 import { TaskService, MockTaskService  }    from "./services/task.service";
 import { SecretService }                    from "./services/secret.service";
+import { ScheduleService }                  from "./services/schedule.service";
 
  import { Ng2PaginationModule }              from "ng2-pagination";
 
@@ -44,7 +45,7 @@ import { SecretService }                    from "./services/secret.service";
                 ],
   providers:    [
                   ServerService,            MockServerService,              TaskService,
-                  MockTaskService,          SecretService
+                  MockTaskService,          SecretService,                  ScheduleService
                 ]
 })
 export class AppModule { }
