@@ -23,7 +23,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor="let task of Entities" [class.selected]="task === selectedTask" (click)="onSelect(task)" style="cursor: pointer;">
+		<tr *ngFor="let task of Entities | paginate: { itemsPerPage: 5, currentPage: paginationCurrentPage }" [class.selected]="task === selectedTask" (click)="onSelect(task)" style="cursor: pointer;">
 			<td>
 				<img [src]="task.taskImage()" [title]="task.TypeToString()">
 			</td>
@@ -46,5 +46,6 @@
 		</tr>
 	</tbody>
 </table>
+<pagination-controls (pageChange)="paginationCurrentPage = $event" #api></pagination-controls>
 
 <task-detail [task]="selectedTask"></task-detail>

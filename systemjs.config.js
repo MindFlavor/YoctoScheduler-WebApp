@@ -21,10 +21,12 @@
       '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
       '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
+
       // other libraries
-      'rxjs':                      'npm:rxjs',
+      'rxjs': 'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
-      "ng2-popover": "node_modules/ng2-popover"
+      "ng2-popover": "npm:ng2-popover",
+      "ng2-pagination": "npm:ng2-pagination/dist"
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -32,9 +34,9 @@
         main: './main.js',
         defaultExtension: 'js'
       },
-      "ng2-popover": { 
-        "main": "index.js", 
-        "defaultExtension": "js" 
+      "ng2-popover": {
+        main: "index.js",
+        defaultExtension: "js"
       },
       rxjs: {
         defaultExtension: 'js'
@@ -42,7 +44,11 @@
       'angular-in-memory-web-api': {
         main: './index.js',
         defaultExtension: 'js'
-      }
+      },
+      "ng2-pagination": {
+        main: 'ng2-pagination.js',
+        defaultExtension: 'js'
+      },
     }
   });
 })(this);
