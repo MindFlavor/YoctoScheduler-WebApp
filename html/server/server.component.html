@@ -1,5 +1,5 @@
 <table class="table table-sm">
-    <tr *ngFor="let server of Entities" [class.selected]="server === selectedServer" (click)="onSelect(server)" style="cursor: pointer;"
+<tr *ngFor="let server of Entities | paginate: { itemsPerPage: 10, currentPage: p }" [class.selected]="server === selectedServer" (click)="onSelect(server)" style="cursor: pointer;"
         [popover]="myPopover">
         <td>
             <popover-content #myPopover title="Server details" placement="bottom" [animation]="true" [closeOnClickOutside]="true">
@@ -11,3 +11,4 @@
         <td>{{server.HostName}}</td>
     </tr>
 </table>
+<pagination-controls (pageChange)="p = $event" #api></pagination-controls>

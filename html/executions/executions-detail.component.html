@@ -14,7 +14,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let exec of executions">
+            <tr *ngFor="let exec of executions | paginate: { itemsPerPage: 10, currentPage: paginationCurrentPage }">
                 <td title="TaskID: {{exec.TaskID}}" [popover]="myPopover">
                     <span class="tag tag-primary">{{taskByID(exec.TaskID).Name}}</span>
 
@@ -49,3 +49,5 @@
             </tr>
     </table>
 </div>
+
+<pagination-controls (pageChange)="paginationCurrentPage = $event" #api></pagination-controls>

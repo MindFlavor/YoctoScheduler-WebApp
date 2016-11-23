@@ -28,6 +28,8 @@ export class TaskComponent extends GenericComponent<Task, number> {
     taskPriority = TaskPriority;
     taskType = TaskType;
 
+    paginationCurrentPage: any;
+
     constructor(private taskService: TaskService, private queueItemService: QueueItemService) {
         super(taskService, 0);
     }
@@ -38,6 +40,14 @@ export class TaskComponent extends GenericComponent<Task, number> {
     }
 
     public newTask(type: TaskType) {
+        // console.log("Pagination == " + this.paginationCurrentPage);
+        // calculate new task page
+        let pages = Math.ceil(this.Entities.length / 5);
+        let goToPage = pages;
+        if (this.Entities.length % 5 === 0) {
+            goToPage++;
+        }
+
         let t: Task;
         switch (type) {
             case TaskType.Wait:
@@ -59,6 +69,7 @@ export class TaskComponent extends GenericComponent<Task, number> {
         }
         this.taskService.insertLocal(t);
         this.onSelect(t);
+        this.paginationCurrentPage = goToPage;
     }
 
     public concurrencyToString(t: Task): string {
