@@ -25,10 +25,12 @@ import { ServerService, MockServerService } from "./services/server.service";
 import { TaskService, MockTaskService  }    from "./services/task.service";
 import { SecretService }                    from "./services/secret.service";
 
+ import { Ng2PaginationModule }              from "ng2-pagination";
+
 @NgModule({
   imports:      [
                   BrowserModule,            FormsModule,                    HttpModule,
-                  routing,                  PopoverModule
+                  routing,                  PopoverModule,                  Ng2PaginationModule
                 ],
   declarations: [
                   AppComponent,             routedComponents,               ServerDetailComponent,
